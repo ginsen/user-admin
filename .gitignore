@@ -27,3 +27,8 @@ TextMate2
 ###> sensiolabs-de/deptrac-shim ###
 /.deptrac.cache
 ###< sensiolabs-de/deptrac-shim ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+/phpunit.xml
+###< symfony/phpunit-bridge ###
