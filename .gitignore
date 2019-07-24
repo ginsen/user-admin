@@ -23,3 +23,7 @@ TextMate2
 /.php_cs
 /.php_cs.cache
 ###< friendsofphp/php-cs-fixer ###
+
+###> sensiolabs-de/deptrac-shim ###
+/.deptrac.cache
+###< sensiolabs-de/deptrac-shim ###

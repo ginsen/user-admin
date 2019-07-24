@@ -71,6 +71,9 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "sensiolabs-de/deptrac-shim": {
+        "version": "0.5.0"
+    },
     "symfony/cache": {
         "version": "v4.3.2"
     },
