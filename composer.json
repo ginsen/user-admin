@@ -1,10 +1,21 @@
 {
+    "name": "ginsen/sf4-ddd-user-admin",
+    "description": "Proof web with symfony 4 under DDD architecture for users administration",
+    "keywords": ["symfony", "ddd"],
+    "homepage": "https://github.com/ginsen/sf4-ddd-user-admin",
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "J. Ginés Hernández G.",
+            "email": "jgines@gmail.com"
+        }
+    ],
     "require": {
-        "php": "^7.1.3",
+        "php": "^7.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "sensio/framework-extra-bundle": "^5.4",
         "symfony/console": "4.3.*",
         "symfony/dotenv": "4.3.*",
         "symfony/flex": "^1.3.1",
