@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+ * Install friendsofphp/php-cs-fixer and fixed code.
  * Change symfony structure to DDD app.
  * Install Symfony 4 basic skeleton.
  * Initial commit.
