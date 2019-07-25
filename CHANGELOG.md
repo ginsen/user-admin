@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+ * Install symfony/security-bundle.
  * Install league/tactician-bundle.
  * Add makefile.
  * Add properties file for SonarQube.
