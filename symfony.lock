@@ -23,14 +23,60 @@
     "doctrine/collections": {
         "version": "v1.6.2"
     },
+    "doctrine/common": {
+        "version": "v2.10.0"
+    },
+    "doctrine/dbal": {
+        "version": "v2.9.2"
+    },
+    "doctrine/doctrine-bundle": {
+        "version": "1.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.6",
+            "ref": "5e476e8edf3fa8e7f045ad034f89bb464424f5c1"
+        },
+        "files": [
+            "config/packages/doctrine.yaml",
+            "config/packages/prod/doctrine.yaml",
+            "src/Entity/.gitignore",
+            "src/Repository/.gitignore"
+        ]
+    },
+    "doctrine/doctrine-cache-bundle": {
+        "version": "1.3.5"
+    },
+    "doctrine/doctrine-migrations-bundle": {
+        "version": "1.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.2",
+            "ref": "c1431086fec31f17fbcfe6d6d7e92059458facc1"
+        },
+        "files": [
+            "config/packages/doctrine_migrations.yaml",
+            "src/Migrations/.gitignore"
+        ]
+    },
     "doctrine/event-manager": {
         "version": "v1.0.0"
     },
     "doctrine/inflector": {
         "version": "v1.3.0"
     },
+    "doctrine/instantiator": {
+        "version": "1.2.0"
+    },
     "doctrine/lexer": {
         "version": "1.0.2"
+    },
+    "doctrine/migrations": {
+        "version": "v2.1.0"
+    },
+    "doctrine/orm": {
+        "version": "v2.6.3"
     },
     "doctrine/persistence": {
         "version": "1.1.1"
@@ -65,6 +111,9 @@
     "hamcrest/hamcrest-php": {
         "version": "v2.0.0"
     },
+    "jdorn/sql-formatter": {
+        "version": "v1.2.17"
+    },
     "mockery/mockery": {
         "version": "1.2.2"
     },
@@ -73,6 +122,12 @@
     },
     "nikic/php-parser": {
         "version": "v4.2.2"
+    },
+    "ocramius/package-versions": {
+        "version": "1.4.0"
+    },
+    "ocramius/proxy-manager": {
+        "version": "2.2.2"
     },
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
@@ -142,6 +197,9 @@
         "version": "v1.0.7"
     },
     "symfony/dependency-injection": {
+        "version": "v4.3.2"
+    },
+    "symfony/doctrine-bridge": {
         "version": "v4.3.2"
     },
     "symfony/dotenv": {
@@ -227,6 +285,9 @@
     },
     "symfony/options-resolver": {
         "version": "v4.3.2"
+    },
+    "symfony/orm-pack": {
+        "version": "v1.0.6"
     },
     "symfony/phpunit-bridge": {
         "version": "4.3",
@@ -337,5 +398,11 @@
     },
     "twig/twig": {
         "version": "v2.11.3"
+    },
+    "zendframework/zend-code": {
+        "version": "3.3.1"
+    },
+    "zendframework/zend-eventmanager": {
+        "version": "3.2.1"
     }
 }

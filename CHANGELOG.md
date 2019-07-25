@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+ * Install Doctrine ORM.
  * Show default HTTP page using twig template engine.
  * Install others require-devs.
  * Install PHPUnit Testing framework.
