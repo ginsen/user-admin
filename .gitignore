@@ -10,6 +10,11 @@ TextMate2
 .vscode
 ###< IDE ###
 
+###> Sonar Scanner ###
+/.scannerwork/
+sonar-project.properties
+###< Sonar Scanner ###
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
