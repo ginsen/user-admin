@@ -16,6 +16,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "league/tactician-bundle": "^1.1",
+        "lexik/jwt-authentication-bundle": "^2.6",
         "sensio/framework-extra-bundle": "^5.4",
         "symfony/console": "4.3.*",
         "symfony/dotenv": "4.3.*",

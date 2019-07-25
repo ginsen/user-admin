@@ -114,6 +114,9 @@
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "lcobucci/jwt": {
+        "version": "3.3.1"
+    },
     "league/tactician": {
         "version": "v1.0.3"
     },
@@ -135,11 +138,26 @@
     "league/tactician-logger": {
         "version": "v0.10.0"
     },
+    "lexik/jwt-authentication-bundle": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "5b2157bcd5778166a5696e42f552ad36529a07a6"
+        },
+        "files": [
+            "config/packages/lexik_jwt_authentication.yaml"
+        ]
+    },
     "mockery/mockery": {
         "version": "1.2.2"
     },
     "monolog/monolog": {
         "version": "1.24.0"
+    },
+    "namshi/jose": {
+        "version": "7.2.3"
     },
     "nikic/php-parser": {
         "version": "v4.2.2"
