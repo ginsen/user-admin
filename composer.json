@@ -15,6 +15,7 @@
         "php": "^7.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "league/tactician-bundle": "^1.1",
         "sensio/framework-extra-bundle": "^5.4",
         "symfony/console": "4.3.*",
         "symfony/dotenv": "4.3.*",
@@ -75,7 +76,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "4.3.*"
         }
     }
