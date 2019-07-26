@@ -39,11 +39,10 @@ services:
     App\UI\Cli\Command\:
         resource: '../src/UI/Cli/Command'
 
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
+    App\UI\Http\ApiRest\Controller\:
+        resource: '../src/UI/Http/ApiRest/Controller'
+        tags: [ 'controller.service_arguments' ]
+
     App\UI\Http\Web\Controller\:
         resource: '../src/UI/Http/Web/Controller'
         tags: ['controller.service_arguments']
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones

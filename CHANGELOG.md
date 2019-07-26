@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+ * Add endpoint api-rest for sign-in user.
  * Install [nelmio/api-doc-bundle](https://github.com/nelmio/NelmioApiDocBundle).
  * Refactor User:create arguments.
  * Command added for create users.

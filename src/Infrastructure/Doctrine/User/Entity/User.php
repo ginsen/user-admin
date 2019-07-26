@@ -82,6 +82,12 @@ class User implements SecurityUserInterface, UserInterface
     }
 
 
+    public function getCredentials(): Credentials
+    {
+        return $this->credentials;
+    }
+
+
     public function isActive(): bool
     {
         return $this->active;

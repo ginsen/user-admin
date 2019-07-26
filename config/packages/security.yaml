@@ -1,11 +1,37 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+        bcrypt:
+            algorithm: auto
+            cost: 12
+
     providers:
-        in_memory: { memory: ~ }
+        users:
+            id: App\Infrastructure\Doctrine\User\Authentication\UserProvider
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        api_doc:
+            pattern:  ^/api/doc
+            stateless: true
+            anonymous: true
+
+        api_user_sign-in:
+            pattern:  ^/api/user/sign-in
+            stateless: true
+            anonymous: true
+
+        api:
+            pattern:  ^/api
+            provider: users
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
         main:
             anonymous: true
 
@@ -18,5 +44,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/profile/*,        roles: ROLE_USER                    }
+        - { path: ^/api/user/sign-in, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/doc,          roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/,             roles: IS_AUTHENTICATED_FULLY       }
