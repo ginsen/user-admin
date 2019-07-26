@@ -16,6 +16,12 @@ doctrine:
             collate: utf8mb4_unicode_ci
 
         url: '%env(resolve:DATABASE_URL)%'
+        types:
+            email: App\Infrastructure\Doctrine\CommonBag\Type\EmailType
+            password: App\Infrastructure\Doctrine\CommonBag\Type\PasswordType
+        mapping_types:
+            email: string
+            password: string
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
