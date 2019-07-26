@@ -24,8 +24,8 @@ class PasswordType extends Type
 
 
     /**
-     * @param array            $fieldDeclaration
-     * @param AbstractPlatform $platform
+     * @param  array            $fieldDeclaration
+     * @param  AbstractPlatform $platform
      * @return string
      */
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
@@ -35,8 +35,8 @@ class PasswordType extends Type
 
 
     /**
-     * @param mixed            $value
-     * @param AbstractPlatform $platform
+     * @param  mixed            $value
+     * @param  AbstractPlatform $platform
      * @return Password|null
      */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?Password
@@ -50,8 +50,8 @@ class PasswordType extends Type
 
 
     /**
-     * @param mixed            $value
-     * @param AbstractPlatform $platform
+     * @param  mixed               $value
+     * @param  AbstractPlatform    $platform
      * @throws ConversionException
      * @return string|null
      */
@@ -70,7 +70,7 @@ class PasswordType extends Type
 
 
     /**
-     * @param AbstractPlatform $platform
+     * @param  AbstractPlatform $platform
      * @return bool
      */
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool

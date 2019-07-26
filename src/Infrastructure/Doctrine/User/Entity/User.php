@@ -39,6 +39,7 @@ class User implements SecurityUserInterface, UserInterface
     public static function create(UuidInterface $uuid, string $email, string $hashedPassword): self
     {
         $credentials = new Credentials(Email::fromStr($email), Password::fromHash($hashedPassword));
+
         return new self($uuid, $credentials);
     }
 

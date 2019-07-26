@@ -24,8 +24,8 @@ class EmailType extends Type
 
 
     /**
-     * @param array            $fieldDeclaration
-     * @param AbstractPlatform $platform
+     * @param  array            $fieldDeclaration
+     * @param  AbstractPlatform $platform
      * @return string
      */
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform): string
@@ -35,8 +35,8 @@ class EmailType extends Type
 
 
     /**
-     * @param mixed            $value
-     * @param AbstractPlatform $platform
+     * @param  mixed            $value
+     * @param  AbstractPlatform $platform
      * @return Email|null
      */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?Email
@@ -50,10 +50,10 @@ class EmailType extends Type
 
 
     /**
-     * @param mixed            $value
-     * @param AbstractPlatform $platform
-     * @return string|null
+     * @param  mixed               $value
+     * @param  AbstractPlatform    $platform
      * @throws ConversionException
+     * @return string|null
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
@@ -70,7 +70,7 @@ class EmailType extends Type
 
 
     /**
-     * @param AbstractPlatform $platform
+     * @param  AbstractPlatform $platform
      * @return bool
      */
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool
