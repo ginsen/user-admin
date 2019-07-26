@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\UI\Http\ApiRest\Controller\User;
 
 use App\Application\Command\User\SignIn\SignInCommand;
-use App\Application\Query\User\GetTokenQuery;
+use App\Application\Query\User\JwtToken\GetTokenQuery;
 use App\UI\Http\ApiRest\Controller\CommandQueryController;
 use Assert\Assertion;
 use Swagger\Annotations as SWG;

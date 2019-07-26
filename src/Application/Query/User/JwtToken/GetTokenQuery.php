@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Query\User;
+namespace App\Application\Query\User\JwtToken;
 
 use App\Domain\User\ValueObj\Email;
 

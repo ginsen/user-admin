@@ -110,6 +110,10 @@ class User implements SecurityUserInterface, UserInterface
 
     public function signIn(string $plainPassword): void
     {
+        if (!$this->active) {
+            throw new InvalidCredentialsException('User inactive.');
+        }
+
         $match = $this->credentials->password->match($plainPassword);
 
         if (!$match) {
