@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+ * Install [nelmio/api-doc-bundle](https://github.com/nelmio/NelmioApiDocBundle).
  * Refactor User:create arguments.
  * Command added for create users.
  * Install [lexik/jwt-authentication-bundle](https://github.com/lexik/LexikJWTAuthenticationBundle).
