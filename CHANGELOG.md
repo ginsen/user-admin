@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+ * Refactor User:create arguments.
  * Command added for create users.
  * Install [lexik/jwt-authentication-bundle](https://github.com/lexik/LexikJWTAuthenticationBundle).
  * Install [symfony/security-bundle](https://symfony.com/doc/current/security.html#installation).

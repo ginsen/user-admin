@@ -38,7 +38,7 @@ class UserCreate
     {
         $this->userMailSpec->isUnique($credentials->email);
 
-        $user = User::create(Uuid::uuid4(), $credentials->email->toStr(), $credentials->password->toStr());
+        $user = User::create(Uuid::uuid4(), $credentials);
 
         $this->userRepo->save($user);
 
