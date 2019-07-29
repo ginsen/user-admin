@@ -129,6 +129,9 @@
             "config/packages/dev/easy_log_handler.yaml"
         ]
     },
+    "elasticsearch/elasticsearch": {
+        "version": "v7.1.1"
+    },
     "exsyst/swagger": {
         "version": "v0.4.1"
     },
@@ -143,6 +146,12 @@
         "files": [
             ".php_cs.dist"
         ]
+    },
+    "guzzlehttp/ringphp": {
+        "version": "1.1.1"
+    },
+    "guzzlehttp/streams": {
+        "version": "3.0.0"
     },
     "hamcrest/hamcrest-php": {
         "version": "v2.0.0"
@@ -252,6 +261,9 @@
         "files": [
             "config/packages/ramsey_uuid_doctrine.yaml"
         ]
+    },
+    "react/promise": {
+        "version": "v2.7.1"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
