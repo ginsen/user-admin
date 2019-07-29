@@ -17,4 +17,5 @@ return [
     Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle::class => ['all' => true],
     Nelmio\ApiDocBundle\NelmioApiDocBundle::class => ['all' => true],
     Broadway\Bundle\BroadwayBundle\BroadwayBundle::class => ['all' => true],
+    OldSound\RabbitMqBundle\OldSoundRabbitMqBundle::class => ['all' => true],
 ];

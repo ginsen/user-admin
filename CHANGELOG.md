@@ -3,7 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
- * Install [elasticsearch/elasticsearch](https://github.com/elastic/elasticsearch-php).
+ * Install [RabbitMQ](https://github.com/php-amqplib/RabbitMqBundle).
+ * Install [Elasticsearch](https://github.com/elastic/elasticsearch-php).
  * Install [broadway/broadway](https://github.com/broadway/broadway) and dependencies.
  * Improve sign-in process, check if user is active before sign-in.
  * Add endpoint api-rest for sign-in user.
