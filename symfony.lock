@@ -2,6 +2,36 @@
     "beberlei/assert": {
         "version": "v3.2.1"
     },
+    "broadway/broadway": {
+        "version": "2.1.0"
+    },
+    "broadway/broadway-bundle": {
+        "version": "0.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.4",
+            "ref": "a4ded8381c60e594474584599659eef9d931c872"
+        },
+        "files": [
+            "config/packages/broadway.yaml"
+        ]
+    },
+    "broadway/event-store-dbal": {
+        "version": "0.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.2",
+            "ref": "a8e44b60058a2798f65be93037aa1562f4de60eb"
+        },
+        "files": [
+            "config/packages/broadway_event_store_dbal.yaml"
+        ]
+    },
+    "broadway/uuid-generator": {
+        "version": "0.4.0"
+    },
     "composer/semver": {
         "version": "1.5.0"
     },
