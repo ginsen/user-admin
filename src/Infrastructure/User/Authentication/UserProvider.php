@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Doctrine\User\Authentication;
+namespace App\Infrastructure\User\Authentication;
 
 use App\Domain\User\Service\UserFinderInterface;
 use App\Domain\User\ValueObj\Email;
-use App\Infrastructure\Doctrine\User\Entity\User;
+use App\Infrastructure\User\Entity\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 

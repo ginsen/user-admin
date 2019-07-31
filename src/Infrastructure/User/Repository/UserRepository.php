@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Doctrine\User\Repository;
+namespace App\Infrastructure\User\Repository;
 
 use App\Domain\Common\Specification\SpecificationInterface;
 use App\Domain\User\Entity\UserInterface;
 use App\Domain\User\Repository\UserRepositoryInterface;
 use App\Infrastructure\Doctrine\CommonBag\ORM\MySqlRepository;
-use App\Infrastructure\Doctrine\User\Entity\User;
+use App\Infrastructure\User\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query;

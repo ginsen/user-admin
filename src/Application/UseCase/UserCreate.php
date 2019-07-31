@@ -9,7 +9,7 @@ use App\Domain\User\Repository\UserRepositoryInterface;
 use App\Domain\User\Service\UserCreateInterface;
 use App\Domain\User\Specification\UniqueEmailSpecificationInterface;
 use App\Domain\User\ValueObj\Credentials;
-use App\Infrastructure\Doctrine\User\Entity\User;
+use App\Infrastructure\User\Entity\User;
 use Ramsey\Uuid\Uuid;
 
 class UserCreate implements UserCreateInterface

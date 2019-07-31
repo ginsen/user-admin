@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Doctrine\User\Specification\Domain;
+namespace App\Infrastructure\User\Specification\Domain;
 
 use App\Domain\User\Entity\UserInterface;
 use App\Domain\User\Exception\Email\EmailAlreadyExistException;

@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+ * Refactor tree directory.
  * Install [RabbitMQ](https://github.com/php-amqplib/RabbitMqBundle).
  * Install [Elasticsearch](https://github.com/elastic/elasticsearch-php).
  * Install [broadway/broadway](https://github.com/broadway/broadway) and dependencies.

@@ -6,7 +6,7 @@ namespace App\Application\Query\User\JwtToken;
 
 use App\Application\Query\QueryHandlerInterface;
 use App\Domain\User\Service\UserFinderInterface;
-use App\Infrastructure\Doctrine\User\Authentication\UserAuthenticationJwtProvider;
+use App\Infrastructure\User\Authentication\UserAuthenticationJwtProvider;
 
 class GetTokenHandler implements QueryHandlerInterface
 {

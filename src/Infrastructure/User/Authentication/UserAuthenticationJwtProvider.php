@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Doctrine\User\Authentication;
+namespace App\Infrastructure\User\Authentication;
 
 use App\Domain\User\ValueObj\Credentials;
-use App\Infrastructure\Doctrine\User\Entity\User;
+use App\Infrastructure\User\Entity\User;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Ramsey\Uuid\UuidInterface;
 

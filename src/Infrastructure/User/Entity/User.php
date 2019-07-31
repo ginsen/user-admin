@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Doctrine\User\Entity;
+namespace App\Infrastructure\User\Entity;
 
 use App\Domain\User\Entity\UserInterface;
 use App\Domain\User\Exception\Credentials\InvalidCredentialsException;
@@ -25,6 +25,9 @@ class User implements SecurityUserInterface, UserInterface
 
     /** @var \DateTime */
     private $createdAt;
+
+    /** @var \DateTime|null */
+    private $updatedAt;
 
 
     private function __construct(UuidInterface $uuid, Credentials $credentials)
@@ -54,7 +57,7 @@ class User implements SecurityUserInterface, UserInterface
     }
 
 
-    public function setUserName(Email $email): self
+    public function setUserName(Email $email): UserInterface
     {
         $this->credentials->email = $email;
 
@@ -74,7 +77,7 @@ class User implements SecurityUserInterface, UserInterface
     }
 
 
-    public function setPassword(Password $password): self
+    public function setPassword(Password $password): UserInterface
     {
         $this->credentials->password = $password;
 
@@ -100,9 +103,23 @@ class User implements SecurityUserInterface, UserInterface
     }
 
 
-    public function setCreatedAt(\DateTime $createdAt): self
+    public function setCreatedAt(\DateTime $createdAt): UserInterface
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+
+    public function getUpdatedAt(): ?\DateTime
+    {
+        return $this->updatedAt;
+    }
+
+
+    public function setUpdatedAt(\DateTime $updatedAt): UserInterface
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

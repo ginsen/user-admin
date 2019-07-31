@@ -7,7 +7,7 @@ security:
 
     providers:
         users:
-            id: App\Infrastructure\Doctrine\User\Authentication\UserProvider
+            id: App\Infrastructure\User\Authentication\UserProvider
 
     firewalls:
         dev:

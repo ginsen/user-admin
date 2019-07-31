@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Doctrine\User\Specification\Orm;
+namespace App\Infrastructure\User\Specification\Orm;
 
 use App\Domain\User\ValueObj\Email;
 use App\Infrastructure\Doctrine\CommonBag\Specification\OrmSpecification;
