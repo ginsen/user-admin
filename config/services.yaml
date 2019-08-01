@@ -13,6 +13,8 @@ services:
         bind:
             $queryBus:   '@tactician.commandbus.query'
             $commandBus: '@tactician.commandbus.command'
+            $eventBus:   '@broadway.event_handling.event_bus'
+            $eventStore: '@broadway.event_store.dbal'
 
 
     _instanceof:
