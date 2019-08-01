@@ -3,14 +3,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
- * Refactor tree directory.
- * Install [RabbitMQ](https://github.com/php-amqplib/RabbitMqBundle).
- * Install [Elasticsearch](https://github.com/elastic/elasticsearch-php).
+ * Create Broadway commands for create/drop events table.
  * Install [broadway/broadway](https://github.com/broadway/broadway) and dependencies.
  * Improve sign-in process, check if user is active before sign-in.
  * Add endpoint api-rest for sign-in user.
  * Install [nelmio/api-doc-bundle](https://github.com/nelmio/NelmioApiDocBundle).
- * Refactor User:create arguments.
  * Command added for create users.
  * Install [lexik/jwt-authentication-bundle](https://github.com/lexik/LexikJWTAuthenticationBundle).
  * Install [symfony/security-bundle](https://symfony.com/doc/current/security.html#installation).
