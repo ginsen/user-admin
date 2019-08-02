@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+ * Add new Api method to change email user.
  * Add Interface for UserAuthenticationJwtProvider.
  * Refactor User domain entity.
  * Added domain-events and event-sourcing behavior.

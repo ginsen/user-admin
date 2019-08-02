@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\User\Entity;
 
+use App\Domain\User\Entity\AggregateRoot\UserChangeEmailTrait;
 use App\Domain\User\Entity\AggregateRoot\UserCreateTrait;
 use App\Domain\User\Entity\AggregateRoot\UserSignInTrait;
 use App\Domain\User\ValueObj\Email;
@@ -13,6 +14,12 @@ use Ramsey\Uuid\UuidInterface;
 
 class User extends EventSourcedAggregateRoot
 {
+    /** Aggregate roots */
+    use UserCreateTrait;
+    use UserSignInTrait;
+    use UserChangeEmailTrait;
+
+
     /** @var UuidInterface */
     protected $uuid;
 
@@ -31,9 +38,6 @@ class User extends EventSourcedAggregateRoot
     /** @var \DateTime|null */
     protected $updatedAt;
 
-
-    use UserCreateTrait;
-    use UserSignInTrait;
 
     /**
      * @return string
@@ -108,29 +112,11 @@ class User extends EventSourcedAggregateRoot
 
 
     /**
-     * @return \DateTime
-     */
-    public function getCreatedAt(): \DateTime
-    {
-        return $this->createdAt;
-    }
-
-
-    /**
      * @param \DateTime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
-    }
-
-
-    /**
-     * @return \DateTime|null
-     */
-    public function getUpdatedAt(): ?\DateTime
-    {
-        return $this->updatedAt;
     }
 
 
