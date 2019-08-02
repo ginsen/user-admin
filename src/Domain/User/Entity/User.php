@@ -2,13 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\User\AggregateRoot;
+namespace App\Domain\User\Entity;
 
-use App\Domain\User\Event\UserSignedIn;
-use App\Domain\User\Event\UserWasCreated;
-use App\Domain\User\Exception\Credentials\InvalidCredentialsException;
-use App\Domain\User\Specification\UniqueEmailSpecificationInterface;
-use App\Domain\User\ValueObj\Credentials;
+use App\Domain\User\Entity\AggregateRoot\UserCreateTrait;
+use App\Domain\User\Entity\AggregateRoot\UserSignInTrait;
 use App\Domain\User\ValueObj\Email;
 use App\Domain\User\ValueObj\Password;
 use Broadway\EventSourcing\EventSourcedAggregateRoot;
@@ -35,52 +32,15 @@ class User extends EventSourcedAggregateRoot
     protected $updatedAt;
 
 
+    use UserCreateTrait;
+    use UserSignInTrait;
+
     /**
      * @return string
      */
     public function getAggregateRootId(): string
     {
         return $this->uuid->toString();
-    }
-
-
-    public static function create(
-        UuidInterface $uuid,
-        Credentials $credentials,
-        UniqueEmailSpecificationInterface $uniqueEmailSpecification
-    ): self {
-        $uniqueEmailSpecification->isUnique($credentials->email);
-
-        $active    = true;
-        $createdAt = new \DateTime();
-
-        $user = new self();
-        $user->apply(new UserWasCreated($uuid, $credentials, $active, $createdAt));
-
-        return $user;
-    }
-
-
-    protected function applyUserWasCreated(UserWasCreated $event): void
-    {
-        $this->uuid = $event->uuid;
-
-        $this->setEmail($event->credentials->email);
-        $this->setPassword($event->credentials->password);
-        $this->setActive($event->active);
-        $this->setCreatedAt($event->createdAt);
-    }
-
-
-    public function signIn(string $plainPassword): void
-    {
-        $match = $this->getPassword()->match($plainPassword);
-
-        if (!$match) {
-            throw new InvalidCredentialsException('Invalid credentials entered.');
-        }
-
-        $this->apply(new UserSignedIn($this->uuid, $this->email));
     }
 
 

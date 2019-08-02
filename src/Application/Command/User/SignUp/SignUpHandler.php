@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Command\User\SignUp;
 
 use App\Application\Command\CommandHandlerInterface;
-use App\Domain\User\AggregateRoot\User;
+use App\Domain\User\Entity\User;
 use App\Domain\User\Repository\UserEventStoreInterface;
 use App\Domain\User\Specification\UniqueEmailSpecificationInterface;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\User\Repository;
 
-use App\Domain\User\AggregateRoot\User;
+use App\Domain\User\Entity\User;
 use App\Domain\User\Repository\UserEventStoreInterface;
 use Broadway\EventHandling\EventBus;
 use Broadway\EventSourcing\AggregateFactory\PublicConstructorAggregateFactory;

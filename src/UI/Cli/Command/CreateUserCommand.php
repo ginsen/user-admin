@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\UI\Cli\Command;
 
 use App\Application\Command\User\SignUp\SignUpCommand;
-use App\Domain\User\AggregateRoot\User;
+use App\Domain\User\Entity\User;
 use App\Domain\User\ValueObj\Credentials;
 use App\UI\Cli\Command\Base\CustomCommand;
 use League\Tactician\CommandBus;

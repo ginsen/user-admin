@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+ * Refactor User domain entity.
  * Added domain-events and event-sourcing behavior.
  * Create Broadway commands for create/drop events table.
  * Install [broadway/broadway](https://github.com/broadway/broadway) and dependencies.
