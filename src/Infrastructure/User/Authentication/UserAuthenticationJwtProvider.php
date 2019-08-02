@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\User\Authentication;
 
+use App\Domain\User\Authentication\UserAuthenticationProviderInterface;
 use App\Domain\User\ValueObj\Credentials;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Ramsey\Uuid\UuidInterface;
 
-final class UserAuthenticationJwtProvider
+final class UserAuthenticationJwtProvider implements UserAuthenticationProviderInterface
 {
     /** @var JWTTokenManagerInterface */
     private $JWTManager;

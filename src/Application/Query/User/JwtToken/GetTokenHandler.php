@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace App\Application\Query\User\JwtToken;
 
 use App\Application\Query\QueryHandlerInterface;
+use App\Domain\User\Authentication\UserAuthenticationProviderInterface;
 use App\Domain\User\Service\UserFinder;
-use App\Infrastructure\User\Authentication\UserAuthenticationJwtProvider;
 
 class GetTokenHandler implements QueryHandlerInterface
 {
     /** @var UserFinder */
     private $userFinder;
 
-    /** @var UserAuthenticationJwtProvider */
+    /** @var UserAuthenticationProviderInterface */
     private $authProvider;
 
 
     public function __construct(
         UserFinder $userFinder,
-        UserAuthenticationJwtProvider $authProvider
+        UserAuthenticationProviderInterface $authProvider
     ) {
         $this->userFinder   = $userFinder;
         $this->authProvider = $authProvider;

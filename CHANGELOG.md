@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+ * Add Interface for UserAuthenticationJwtProvider.
  * Refactor User domain entity.
  * Added domain-events and event-sourcing behavior.
  * Create Broadway commands for create/drop events table.
