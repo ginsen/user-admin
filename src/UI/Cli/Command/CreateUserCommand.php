@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\UI\Cli\Command;
 
 use App\Application\Command\User\SignUp\SignUpCommand;
-use App\Domain\User\Entity\UserInterface;
+use App\Domain\User\AggregateRoot\User;
 use App\Domain\User\ValueObj\Credentials;
 use App\UI\Cli\Command\Base\CustomCommand;
 use League\Tactician\CommandBus;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -33,8 +34,9 @@ class CreateUserCommand extends CustomCommand
      */
     public function __construct(CommandBus $commandBus)
     {
-        parent::__construct();
         $this->commandBus = $commandBus;
+
+        parent::__construct();
     }
 
 
@@ -91,6 +93,7 @@ class CreateUserCommand extends CustomCommand
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $command = new SignUpCommand(
+            $uuid     = Uuid::uuid4()->toString(),
             $email    = (string) $input->getArgument('email'),
             $password = (string) $this->password
         );
@@ -102,16 +105,16 @@ class CreateUserCommand extends CustomCommand
 
     /**
      * @param OutputInterface $output
-     * @param UserInterface   $user
+     * @param User            $user
      */
-    private function showUser(OutputInterface $output, UserInterface $user): void
+    private function showUser(OutputInterface $output, User $user): void
     {
         $output->writeln('');
 
         $table = new Table($output);
         $table->setHeaders(['', 'User Created']);
-        $table->addRow(['Uuid', $user->getId()]);
-        $table->addRow(['UserName', $user->getUsername()]);
+        $table->addRow(['Uuid', $user->getUuid()->toString()]);
+        $table->addRow(['UserName', $user->getEmail()->toStr()]);
         $table->render();
     }
 }

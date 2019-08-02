@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\User\Specification\Domain;
 
-use App\Domain\User\Entity\UserInterface;
 use App\Domain\User\Exception\Email\EmailAlreadyExistException;
-use App\Domain\User\Repository\UserRepositoryInterface;
 use App\Domain\User\Specification\UniqueEmailSpecificationInterface;
 use App\Domain\User\Specification\UserSpecificationFactoryInterface;
 use App\Domain\User\ValueObj\Email;
+use App\Infrastructure\User\Projection\UserView;
+use App\Infrastructure\User\Repository\UserRepository;
 use Doctrine\ORM\NonUniqueResultException;
 
 class UniqueEmailSpecification implements UniqueEmailSpecificationInterface
 {
-    /** @var UserRepositoryInterface */
+    /** @var UserRepository */
     private $userRepo;
 
     /** @var UserSpecificationFactoryInterface */
@@ -24,11 +24,11 @@ class UniqueEmailSpecification implements UniqueEmailSpecificationInterface
     /**
      * UniqueEmailSpecification constructor.
      *
-     * @param UserRepositoryInterface           $userRepo
+     * @param UserRepository                    $userRepo
      * @param UserSpecificationFactoryInterface $userSpecFactory
      */
     public function __construct(
-        UserRepositoryInterface $userRepo,
+        UserRepository $userRepo,
         UserSpecificationFactoryInterface $userSpecFactory
     ) {
         $this->userRepo    = $userRepo;
@@ -48,7 +48,7 @@ class UniqueEmailSpecification implements UniqueEmailSpecificationInterface
             $specification = $this->specFactory->createForFindOneWithEmail($value);
             $authUser      = $this->userRepo->getOneOrNull($specification);
 
-            if ($authUser instanceof UserInterface) {
+            if ($authUser instanceof UserView) {
                 throw new EmailAlreadyExistException('Email already registered.');
             }
         } catch (NonUniqueResultException $e) {

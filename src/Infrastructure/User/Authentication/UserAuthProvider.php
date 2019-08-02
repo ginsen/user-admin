@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\User\Authentication;
 
-use App\Domain\User\Service\UserFinderInterface;
+use App\Domain\User\Service\UserFinder;
 use App\Domain\User\ValueObj\Email;
-use App\Infrastructure\User\Entity\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-class UserProvider implements UserProviderInterface
+class UserAuthProvider implements UserProviderInterface
 {
-    /** @var UserFinderInterface */
+    /** @var UserFinder */
     private $userFinder;
 
 
-    public function __construct(UserFinderInterface $finderByEmail)
+    public function __construct(UserFinder $finderByEmail)
     {
         $this->userFinder = $finderByEmail;
     }
@@ -24,7 +23,7 @@ class UserProvider implements UserProviderInterface
 
     public function supportsClass($class): bool
     {
-        return User::class === $class;
+        return UserAuth::class === $class;
     }
 
 
@@ -38,6 +37,6 @@ class UserProvider implements UserProviderInterface
     {
         $user = $this->userFinder->findByEmail(Email::fromStr($username));
 
-        return User::create($user->getUuid(), $user->getCredentials());
+        return UserAuth::create($user->getUuid(), $user->getCredentials());
     }
 }

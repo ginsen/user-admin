@@ -2,7 +2,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
-    <entity name="App\Infrastructure\User\Entity\User" table="user">
+    <entity name="App\Infrastructure\User\Projection\UserView" table="user">
 
         <id name="uuid" type="uuid" column="uuid"/>
 

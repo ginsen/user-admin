@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Doctrine\CommonBag\Type;
+namespace App\Infrastructure\Doctrine\Type;
 
 use App\Domain\User\ValueObj\Password;
 use Doctrine\DBAL\Platforms\AbstractPlatform;

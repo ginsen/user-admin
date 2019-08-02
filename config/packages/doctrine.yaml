@@ -17,8 +17,8 @@ doctrine:
 
         url: '%env(resolve:DATABASE_URL)%'
         types:
-            email: App\Infrastructure\Doctrine\CommonBag\Type\EmailType
-            password: App\Infrastructure\Doctrine\CommonBag\Type\PasswordType
+            email: App\Infrastructure\Doctrine\Type\EmailType
+            password: App\Infrastructure\Doctrine\Type\PasswordType
         mapping_types:
             email: string
             password: string

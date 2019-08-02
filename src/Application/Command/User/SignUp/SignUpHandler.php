@@ -5,32 +5,47 @@ declare(strict_types=1);
 namespace App\Application\Command\User\SignUp;
 
 use App\Application\Command\CommandHandlerInterface;
-use App\Domain\User\Entity\UserInterface;
-use App\Domain\User\Service\UserCreateInterface;
+use App\Domain\User\AggregateRoot\User;
+use App\Domain\User\Repository\UserEventStoreInterface;
+use App\Domain\User\Specification\UniqueEmailSpecificationInterface;
 
 class SignUpHandler implements CommandHandlerInterface
 {
-    /** @var UserCreateInterface */
-    private $userCreate;
+    /** @var UserEventStoreInterface */
+    private $eventStore;
+
+    /** @var UniqueEmailSpecificationInterface */
+    private $uniqueEmailSpecification;
 
 
     /**
      * SignUpHandler constructor.
-     * @param UserCreateInterface $userCreate
+     * @param UserEventStoreInterface           $userEventStore
+     * @param UniqueEmailSpecificationInterface $uniqueEmailSpecification
      */
-    public function __construct(UserCreateInterface $userCreate)
-    {
-        $this->userCreate = $userCreate;
+    public function __construct(
+        UserEventStoreInterface $userEventStore,
+        UniqueEmailSpecificationInterface $uniqueEmailSpecification
+    ) {
+        $this->eventStore               = $userEventStore;
+        $this->uniqueEmailSpecification = $uniqueEmailSpecification;
     }
 
 
     /**
      * @param  SignUpCommand $command
-     * @throws \Exception
-     * @return UserInterface
+     * @return User
      */
-    public function __invoke(SignUpCommand $command): UserInterface
+    public function __invoke(SignUpCommand $command): User
     {
-        return $this->userCreate->create($command->credentials);
+        $user = User::create(
+            $command->uuid,
+            $command->credentials,
+            $this->uniqueEmailSpecification
+        );
+
+        $this->eventStore->store($user);
+
+        return $user;
     }
 }

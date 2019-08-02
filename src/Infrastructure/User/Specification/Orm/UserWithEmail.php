@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\User\Specification\Orm;
 
 use App\Domain\User\ValueObj\Email;
-use App\Infrastructure\Doctrine\CommonBag\Specification\OrmSpecification;
+use App\Infrastructure\Doctrine\Specification\OrmSpecification;
 use Doctrine\ORM\Query\Expr;
 
 class UserWithEmail extends OrmSpecification

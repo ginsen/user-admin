@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\User\Repository;
 
-use App\Domain\Common\PersistLayer\PersistLayerInterface;
 use App\Domain\Common\Specification\SpecificationInterface;
-use App\Domain\User\Entity\UserInterface;
+use App\Domain\User\Entity\UserViewInterface;
 
-interface UserRepositoryInterface extends PersistLayerInterface
+interface UserRepositoryInterface
 {
-    public function getOneOrNull(SpecificationInterface $specification): ?UserInterface;
+    public function getOneOrNull(SpecificationInterface $specification): ?UserViewInterface;
 }

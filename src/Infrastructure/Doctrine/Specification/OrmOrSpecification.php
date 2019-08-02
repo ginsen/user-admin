@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Doctrine\CommonBag\Specification;
+namespace App\Infrastructure\Doctrine\Specification;
 
 use App\Domain\Common\Specification\SpecificationInterface;
 use Doctrine\ORM\Query\Expr;
 
-class OrmAndSpecification extends OrmSpecification
+class OrmOrSpecification extends OrmSpecification
 {
     /** @var SpecificationInterface */
     private $left;
@@ -33,7 +33,7 @@ class OrmAndSpecification extends OrmSpecification
 
     public function getConditions()
     {
-        return $this->expr->andX(
+        return $this->expr->orX(
             $this->left->getConditions(),
             $this->right->getConditions()
         );

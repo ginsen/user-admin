@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Infrastructure\User\Repository;
 
 use App\Domain\Common\Specification\SpecificationInterface;
-use App\Domain\User\Entity\UserInterface;
+use App\Domain\User\Entity\UserViewInterface;
 use App\Domain\User\Repository\UserRepositoryInterface;
-use App\Infrastructure\Doctrine\CommonBag\ORM\MySqlRepository;
-use App\Infrastructure\User\Entity\User;
+use App\Infrastructure\Doctrine\ORM\MySqlRepository;
+use App\Infrastructure\User\Projection\UserView;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query;
@@ -21,7 +21,7 @@ class UserRepository extends MySqlRepository implements UserRepositoryInterface
      */
     public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->class = User::class;
+        $this->class = UserView::class;
         parent::__construct($entityManager);
     }
 
@@ -29,9 +29,9 @@ class UserRepository extends MySqlRepository implements UserRepositoryInterface
     /**
      * @param  SpecificationInterface   $specification
      * @throws NonUniqueResultException
-     * @return UserInterface|null
+     * @return UserViewInterface|null
      */
-    public function getOneOrNull(SpecificationInterface $specification): ?UserInterface
+    public function getOneOrNull(SpecificationInterface $specification): ?UserViewInterface
     {
         $query = $this->getOrmQuery($specification);
 
@@ -49,7 +49,7 @@ class UserRepository extends MySqlRepository implements UserRepositoryInterface
 
         $builder
             ->select('user')
-            ->from(User::class, 'user')
+            ->from(UserView::class, 'user')
             ->where($specification->getConditions())
             ->setParameters($specification->getParameters());
 

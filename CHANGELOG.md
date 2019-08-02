@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+ * Added domain-events and event-sourcing behavior.
  * Create Broadway commands for create/drop events table.
  * Install [broadway/broadway](https://github.com/broadway/broadway) and dependencies.
  * Improve sign-in process, check if user is active before sign-in.

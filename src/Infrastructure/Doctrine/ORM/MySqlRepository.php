@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Doctrine\CommonBag\ORM;
+namespace App\Infrastructure\Doctrine\ORM;
 
-use App\Domain\Common\PersistLayer\PersistLayerInterface;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Query\QueryBuilder as DbalQueryBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder as OrmQueryBuilder;
 
-abstract class MySqlRepository implements PersistLayerInterface
+abstract class MySqlRepository
 {
     /** @var string */
     protected $class;

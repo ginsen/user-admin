@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Application\UseCase;
+namespace App\Domain\User\Service;
 
-use App\Domain\User\Entity\UserInterface;
+use App\Domain\User\Entity\UserViewInterface;
 use App\Domain\User\Exception\Credentials\InvalidCredentialsException;
 use App\Domain\User\Repository\UserRepositoryInterface;
-use App\Domain\User\Service\UserFinderInterface;
 use App\Domain\User\Specification\UserSpecificationFactoryInterface;
 use App\Domain\User\ValueObj\Email;
 use Ramsey\Uuid\UuidInterface;
 
-class UserFinder implements UserFinderInterface
+class UserFinder
 {
     /** @var UserRepositoryInterface */
     private $userRepo;
@@ -30,20 +29,25 @@ class UserFinder implements UserFinderInterface
     }
 
 
-    public function findByEmail(Email $email): UserInterface
+    /**
+     * @param  Email                  $email
+     * @return UserViewInterface|null
+     */
+    public function findByEmail(Email $email): ?UserViewInterface
     {
         $specification = $this->specFactory->createForFindOneWithEmail($email);
         $user          = $this->userRepo->getOneOrNull($specification);
-
-        if (null === $user) {
-            throw new InvalidCredentialsException('Invalid credentials entered.');
-        }
 
         return $user;
     }
 
 
-    public function findByUuid(UuidInterface $uuid): UserInterface
+    /**
+     * @param  UuidInterface     $uuid
+     * @throws \Exception
+     * @return UserViewInterface
+     */
+    public function findByUuid(UuidInterface $uuid): UserViewInterface
     {
         $specification = $this->specFactory->createForFindOneWithUuid($uuid);
         $user          = $this->userRepo->getOneOrNull($specification);

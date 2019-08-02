@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Doctrine\CommonBag\Specification;
+namespace App\Infrastructure\Doctrine\Specification;
 
 use App\Domain\Common\Specification\SpecificationInterface;
 use Doctrine\ORM\Query\Expr;

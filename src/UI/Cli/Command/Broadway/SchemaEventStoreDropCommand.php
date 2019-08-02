@@ -41,7 +41,7 @@ class SchemaEventStoreDropCommand extends CustomCommand
 
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -50,7 +50,7 @@ class SchemaEventStoreDropCommand extends CustomCommand
 
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\User\Specification\Orm;
 
-use App\Infrastructure\Doctrine\CommonBag\Specification\OrmSpecification;
+use App\Infrastructure\Doctrine\Specification\OrmSpecification;
 use Doctrine\ORM\Query\Expr;
 use Ramsey\Uuid\UuidInterface;
 
