@@ -2,7 +2,7 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     encoders:
         bcrypt:
-            algorithm: auto
+            algorithm: bcrypt
             cost: 12
 
     providers:
@@ -24,13 +24,13 @@ security:
             stateless: true
             anonymous: true
 
-        api:
-            pattern:  ^/api
-            provider: users
-            stateless: true
-            guard:
-                authenticators:
-                    - lexik_jwt_authentication.jwt_token_authenticator
+#        api:
+#            pattern:  ^/api
+#            provider: users
+#            stateless: true
+#            guard:
+#                authenticators:
+#                    - lexik_jwt_authentication.jwt_token_authenticator
 
         main:
             anonymous: true
@@ -47,4 +47,5 @@ security:
         - { path: ^/profile/*,        roles: ROLE_USER                    }
         - { path: ^/api/user/sign-in, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/doc,          roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/,             roles: IS_AUTHENTICATED_FULLY       }
+#        - { path: ^/api/,             roles: IS_AUTHENTICATED_FULLY       }
+        - { path: ^/api/,             roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -14,8 +14,10 @@
     "require": {
         "php": "^7.2",
         "ext-ctype": "*",
+        "ext-curl": "*",
         "ext-iconv": "*",
         "ext-json": "*",
+        "ext-pdo": "*",
         "beberlei/assert": "^3.2",
         "broadway/broadway": "^2.1",
         "broadway/broadway-bundle": "^0.4.2",
