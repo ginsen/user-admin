@@ -29,9 +29,9 @@ ruleset:
   Domain:
   Application:
     - Domain
-    - Infrastructure
   Infrastructure:
     - Domain
   UI:
     - Domain
     - Application
+    - Infrastructure

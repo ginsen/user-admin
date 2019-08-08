@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace App\UI\Http\ApiRest\Controller\User;
 
 use App\Application\Command\User\ChangeEmail\ChangeEmailCommand;
+use App\Infrastructure\Exception\Session\ForbiddenException;
+use App\Infrastructure\User\Authentication\Session;
 use App\UI\Http\ApiRest\Controller\CommandQueryController;
 use Assert\Assertion;
+use League\Tactician\CommandBus;
+use Nelmio\ApiDocBundle\Annotation\Security;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,6 +18,23 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserChangeEmailController extends CommandQueryController
 {
+    /** @var Session */
+    private $session;
+
+
+    /**
+     * UserChangeEmailController constructor.
+     * @param Session    $session
+     * @param CommandBus $commandBus
+     * @param CommandBus $queryBus
+     */
+    public function __construct(Session $session, CommandBus $commandBus, CommandBus $queryBus)
+    {
+        $this->session = $session;
+        parent::__construct($commandBus, $queryBus);
+    }
+
+
     /**
      * @Route(
      *     "/user/{uuid}/email",
@@ -49,12 +70,16 @@ class UserChangeEmailController extends CommandQueryController
      *
      * @SWG\Tag(name="User")
      *
-     * @param string  $uuid
-     * @param Request $request
+     * @Security(name="Bearer")
+     *
+     * @param  string       $uuid
+     * @param  Request      $request
      * @return JsonResponse
      */
     public function __invoke(string $uuid, Request $request): JsonResponse
     {
+        $this->validateUuid($uuid);
+
         $params = json_decode($request->getContent(), true);
         $email  = $params['email'];
 
@@ -65,5 +90,16 @@ class UserChangeEmailController extends CommandQueryController
         $this->handleCommand($command);
 
         return JsonResponse::create();
+    }
+
+
+    /**
+     * @param string $uuid
+     */
+    private function validateUuid(string $uuid): void
+    {
+        if (!$this->session->sameByUuid($uuid)) {
+            throw new ForbiddenException();
+        }
     }
 }

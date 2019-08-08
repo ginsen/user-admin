@@ -14,7 +14,7 @@ use Ramsey\Uuid\UuidInterface;
 
 class User extends EventSourcedAggregateRoot
 {
-    /** Aggregate roots */
+    // Aggregate roots
     use UserCreateTrait;
     use UserSignInTrait;
     use UserChangeEmailTrait;

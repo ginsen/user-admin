@@ -18,7 +18,7 @@ class UserEmailChanged implements Serializable
     /** @var Email */
     public $email;
 
-    /**@var \DateTime */
+    // @var \DateTime
     public $updatedAt;
 
 
@@ -31,9 +31,9 @@ class UserEmailChanged implements Serializable
 
 
     /**
-     * @param array $data
-     * @return self
+     * @param  array      $data
      * @throws \Exception
+     * @return self
      */
     public static function deserialize(array $data): self
     {

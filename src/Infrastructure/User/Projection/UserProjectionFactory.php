@@ -39,7 +39,7 @@ class UserProjectionFactory extends Projector
 
 
     /**
-     * @param UserEmailChanged $emailChanged
+     * @param  UserEmailChanged $emailChanged
      * @throws \Exception
      */
     protected function applyUserEmailChanged(UserEmailChanged $emailChanged): void

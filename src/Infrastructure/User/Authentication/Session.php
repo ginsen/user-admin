@@ -24,7 +24,7 @@ final class Session
 
 
     /**
-     * @param string $uuid
+     * @param  string $uuid
      * @return bool
      */
     public function sameByUuid(string $uuid): bool

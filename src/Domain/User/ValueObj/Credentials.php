@@ -40,7 +40,7 @@ class Credentials
             Assertion::minLength(
                 $value,
                 static::MIN_PASSWORD_LENGTH,
-                sprintf('The password is very sort, minimum length %d', static::MIN_PASSWORD_LENGTH)
+                sprintf('The password is very short, minimum length %d', static::MIN_PASSWORD_LENGTH)
             );
 
             if (null !== $password) {
