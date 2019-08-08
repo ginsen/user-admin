@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\UI\Http\ApiRest\Controller\User;
 
 use App\Application\Command\User\ChangeEmail\ChangeEmailCommand;
+use App\Application\Query\User\JwtToken\GetTokenQuery;
 use App\Infrastructure\Exception\Session\ForbiddenException;
 use App\Infrastructure\User\Authentication\Session;
 use App\UI\Http\ApiRest\Controller\CommandQueryController;
@@ -86,10 +87,14 @@ class UserChangeEmailController extends CommandQueryController
         Assertion::notNull($email, "Email can\'t be null");
 
         $command = new ChangeEmailCommand($uuid, $email);
-
         $this->handleCommand($command);
 
-        return JsonResponse::create();
+        $getTokenQuery = new GetTokenQuery($email);
+
+        return JsonResponse::create([
+            'new_email'  => $email,
+            'new_token' => $this->handleQuery($getTokenQuery),
+        ]);
     }
 
 
