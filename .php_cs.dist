@@ -36,6 +36,7 @@ $config = PhpCsFixer\Config::create()
         'no_superfluous_phpdoc_tags' => false,
         'declare_strict_types' => true,
         'class_attributes_separation' => false,
+        'phpdoc_separation' => false,
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()

@@ -6,6 +6,7 @@ namespace App\Infrastructure\User\Projection;
 
 use App\Domain\User\Event\UserEmailChanged;
 use App\Domain\User\Event\UserWasCreated;
+use App\Domain\User\Event\UserWasDisabled;
 use App\Domain\User\Service\UserFinder;
 use App\Infrastructure\User\Repository\UserRepository;
 use Broadway\ReadModel\Projector;
@@ -27,27 +28,42 @@ class UserProjectionFactory extends Projector
 
 
     /**
-     * @param  UserWasCreated $userWasCreated
+     * @param  UserWasCreated $event
      * @throws \Exception
      */
-    protected function applyUserWasCreated(UserWasCreated $userWasCreated): void
+    protected function applyUserWasCreated(UserWasCreated $event): void
     {
-        $userReadModel = UserView::fromSerializable($userWasCreated);
+        $userReadModel = UserView::fromSerializable($event);
 
         $this->repository->save($userReadModel);
     }
 
 
     /**
-     * @param  UserEmailChanged $emailChanged
+     * @param  UserEmailChanged $event
      * @throws \Exception
      */
-    protected function applyUserEmailChanged(UserEmailChanged $emailChanged): void
+    protected function applyUserEmailChanged(UserEmailChanged $event): void
     {
-        $userReadModel = $this->userFinder->findByUuid($emailChanged->uuid);
+        $userReadModel = $this->userFinder->findByUuid($event->uuid);
 
-        $userReadModel->setEmail($emailChanged->email);
-        $userReadModel->setUpdatedAt($emailChanged->updatedAt);
+        $userReadModel->setEmail($event->email);
+        $userReadModel->setUpdatedAt($event->updatedAt);
+
+        $this->repository->save($userReadModel);
+    }
+
+
+    /**
+     * @param UserWasDisabled $event
+     * @throws \Exception
+     */
+    protected function applyUserWasDisabled(UserWasDisabled $event): void
+    {
+        $userReadModel = $this->userFinder->findByUuid($event->uuid);
+
+        $userReadModel->setActive($event->active);
+        $userReadModel->setUpdatedAt($event->updatedAt);
 
         $this->repository->save($userReadModel);
     }

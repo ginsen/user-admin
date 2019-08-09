@@ -1,31 +1,28 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Domain\User\Event;
 
-use App\Domain\User\ValueObj\Email;
 use Assert\Assertion;
 use Broadway\Serializer\Serializable;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
-class UserEmailChanged implements Serializable
+class UserWasDisabled implements Serializable
 {
     /** @var UuidInterface */
     public $uuid;
 
-    /** @var Email */
-    public $email;
+    /** @var bool */
+    public $active;
 
-    // @var \DateTime
+    /** @var \DateTime */
     public $updatedAt;
 
 
-    public function __construct(UuidInterface $uuid, Email $email, \DateTime $updatedAt)
+    public function __construct(UuidInterface $uuid, bool $active, \DateTime $updatedAt)
     {
         $this->uuid      = $uuid;
-        $this->email     = $email;
+        $this->active    = $active;
         $this->updatedAt = $updatedAt;
     }
 
@@ -37,7 +34,7 @@ class UserEmailChanged implements Serializable
     {
         return [
             'uuid'       => $this->uuid->toString(),
-            'email'      => $this->email->toStr(),
+            'active'     => ($this->active) ? 'true' : 'false',
             'updated_at' => $this->updatedAt->format('Y-m-d H:i:s'),
         ];
     }
@@ -51,11 +48,12 @@ class UserEmailChanged implements Serializable
     public static function deserialize(array $data): self
     {
         Assertion::keyExists($data, 'uuid');
-        Assertion::keyExists($data, 'email');
+        Assertion::keyExists($data, 'active');
+        Assertion::keyExists($data, 'updated_at');
 
         return new self(
             Uuid::fromString($data['uuid']),
-            Email::fromStr($data['email']),
+            (bool) $data['active'],
             new \DateTime($data['updated_at'])
         );
     }

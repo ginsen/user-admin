@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+ * Add command CLI for disabling user.
  * Add new Api method to change email user.
  * Add Interface for UserAuthenticationJwtProvider.
  * Refactor User domain entity.
