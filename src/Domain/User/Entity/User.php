@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domain\User\Entity;
 
+use App\Domain\User\Entity\AggregateRoot\UserChangeAliveTrait;
 use App\Domain\User\Entity\AggregateRoot\UserChangeEmailTrait;
 use App\Domain\User\Entity\AggregateRoot\UserCreateTrait;
-use App\Domain\User\Entity\AggregateRoot\UserChangeAliveTrait;
 use App\Domain\User\Entity\AggregateRoot\UserSignInTrait;
 use App\Domain\User\ValueObj\Email;
 use App\Domain\User\ValueObj\Password;

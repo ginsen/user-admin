@@ -27,7 +27,7 @@ final class Item
     /**
      * Item constructor.
      * @param SerializableReadModel $serializableReadModel
-     * @param array $relations
+     * @param array                 $relations
      */
     public function __construct(SerializableReadModel $serializableReadModel, array $relations = [])
     {
@@ -40,12 +40,12 @@ final class Item
 
 
     /**
-     * @param SerializableReadModel $model
+     * @param  SerializableReadModel $model
      * @return string
      */
     private function type(SerializableReadModel $model): string
     {
-        $path = explode('\\', get_class($model));
+        $path = explode('\\', \get_class($model));
 
         return array_pop($path);
     }

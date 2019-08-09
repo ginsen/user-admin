@@ -27,9 +27,9 @@ class UserRepository extends MySqlRepository implements UserRepositoryInterface
 
 
     /**
-     * @param SpecificationInterface $specification
-     * @return SerializableReadModel|null
+     * @param  SpecificationInterface     $specification
      * @throws NonUniqueResultException
+     * @return SerializableReadModel|null
      */
     public function getOneOrNull(SpecificationInterface $specification): ?SerializableReadModel
     {

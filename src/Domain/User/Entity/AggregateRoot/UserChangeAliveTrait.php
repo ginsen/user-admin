@@ -10,7 +10,7 @@ use Assert\Assertion;
 trait UserChangeAliveTrait
 {
     /**
-     * @param bool $active
+     * @param  bool       $active
      * @throws \Exception
      */
     public function changeActive(bool $active): void

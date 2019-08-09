@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\User\Projection;
 
+use App\Domain\User\Event\UserAliveChanged;
 use App\Domain\User\Event\UserEmailChanged;
 use App\Domain\User\Event\UserWasCreated;
-use App\Domain\User\Event\UserAliveChanged;
 use App\Domain\User\Service\UserFinder;
 use App\Infrastructure\User\Repository\UserRepository;
 use Broadway\ReadModel\Projector;

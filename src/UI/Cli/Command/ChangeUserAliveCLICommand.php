@@ -58,7 +58,7 @@ class ChangeUserAliveCLICommand extends CustomCommand
             ->setDefinition([
                 new InputArgument('email', InputArgument::REQUIRED, 'Email user'),
                 new InputOption('enable', null, InputOption::VALUE_NONE, 'Enable user'),
-                new InputOption('disable', null, InputOption::VALUE_NONE, 'Disable user')
+                new InputOption('disable', null, InputOption::VALUE_NONE, 'Disable user'),
             ]);
 
         $this->addOptionForce();
@@ -76,10 +76,10 @@ class ChangeUserAliveCLICommand extends CustomCommand
 
 
     /**
-     * @param InputInterface $input
+     * @param  InputInterface $input
      * @return bool
      */
-    private function getActiveOption(InputInterface $input) : bool
+    private function getActiveOption(InputInterface $input): bool
     {
         $enable  = (bool) $input->getOption('enable');
         $disable = (bool) $input->getOption('disable');
@@ -101,7 +101,7 @@ class ChangeUserAliveCLICommand extends CustomCommand
         }
 
         $query = new FindByEmailQuery($this->email);
-        $user = $this->queryBus->handle($query);
+        $user  = $this->queryBus->handle($query);
 
         $this->showUser($output, $user);
     }
@@ -109,7 +109,7 @@ class ChangeUserAliveCLICommand extends CustomCommand
 
     /**
      * @param OutputInterface $output
-     * @param Item $user
+     * @param Item            $user
      */
     private function showUser(OutputInterface $output, Item $user): void
     {

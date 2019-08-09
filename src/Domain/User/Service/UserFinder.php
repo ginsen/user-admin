@@ -30,7 +30,7 @@ class UserFinder
 
 
     /**
-     * @param Email $email
+     * @param  Email                      $email
      * @return SerializableReadModel|null
      */
     public function findByEmail(Email $email): ?SerializableReadModel
@@ -43,7 +43,7 @@ class UserFinder
 
 
     /**
-     * @param UuidInterface $uuid
+     * @param  UuidInterface         $uuid
      * @return SerializableReadModel
      */
     public function findByUuid(UuidInterface $uuid): SerializableReadModel

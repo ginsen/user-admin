@@ -108,7 +108,7 @@ class CreateUserCLICommand extends CustomCommand
         $this->commandBus->handle($command);
 
         $query = new FindByEmailQuery($email);
-        $user = $this->queryBus->handle($query);
+        $user  = $this->queryBus->handle($query);
 
         $this->showUser($output, $user);
     }
@@ -116,7 +116,7 @@ class CreateUserCLICommand extends CustomCommand
 
     /**
      * @param OutputInterface $output
-     * @param Item $user
+     * @param Item            $user
      */
     private function showUser(OutputInterface $output, Item $user): void
     {

@@ -33,7 +33,7 @@ class SignUpHandler implements CommandHandlerInterface
 
 
     /**
-     * @param  SignUpCommand $command
+     * @param SignUpCommand $command
      */
     public function __invoke(SignUpCommand $command): void
     {
