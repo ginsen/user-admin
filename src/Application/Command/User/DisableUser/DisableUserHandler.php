@@ -25,7 +25,7 @@ class DisableUserHandler implements CommandHandlerInterface
 
 
     /**
-     * @param DisableUserCommand $command
+     * @param  DisableUserCommand $command
      * @throws \Exception
      */
     public function __invoke(DisableUserCommand $command)

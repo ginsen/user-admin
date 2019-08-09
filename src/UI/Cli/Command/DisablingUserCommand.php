@@ -33,7 +33,7 @@ class DisablingUserCommand extends CustomCommand
 
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function configure()
     {

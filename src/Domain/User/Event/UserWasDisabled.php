@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\User\Event;
 
 use Assert\Assertion;
@@ -41,7 +43,7 @@ class UserWasDisabled implements Serializable
 
 
     /**
-     * @param  array $data
+     * @param  array      $data
      * @throws \Exception
      * @return self
      */

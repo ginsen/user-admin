@@ -55,7 +55,7 @@ class UserProjectionFactory extends Projector
 
 
     /**
-     * @param UserWasDisabled $event
+     * @param  UserWasDisabled $event
      * @throws \Exception
      */
     protected function applyUserWasDisabled(UserWasDisabled $event): void

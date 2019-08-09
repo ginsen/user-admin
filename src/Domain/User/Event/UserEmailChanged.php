@@ -44,7 +44,7 @@ class UserEmailChanged implements Serializable
 
 
     /**
-     * @param  array $data
+     * @param  array      $data
      * @throws \Exception
      * @return self
      */

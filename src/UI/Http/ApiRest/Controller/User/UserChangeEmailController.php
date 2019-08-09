@@ -93,7 +93,7 @@ class UserChangeEmailController extends CommandQueryController
 
         return JsonResponse::create([
             'new_email'  => $email,
-            'new_token' => $this->handleQuery($getTokenQuery),
+            'new_token'  => $this->handleQuery($getTokenQuery),
         ]);
     }
 
