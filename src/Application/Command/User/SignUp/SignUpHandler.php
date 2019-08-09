@@ -34,9 +34,8 @@ class SignUpHandler implements CommandHandlerInterface
 
     /**
      * @param  SignUpCommand $command
-     * @return User
      */
-    public function __invoke(SignUpCommand $command): User
+    public function __invoke(SignUpCommand $command): void
     {
         $user = User::create(
             $command->uuid,
@@ -45,7 +44,5 @@ class SignUpHandler implements CommandHandlerInterface
         );
 
         $this->eventStore->store($user);
-
-        return $user;
     }
 }

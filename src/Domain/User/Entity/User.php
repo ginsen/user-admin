@@ -6,7 +6,7 @@ namespace App\Domain\User\Entity;
 
 use App\Domain\User\Entity\AggregateRoot\UserChangeEmailTrait;
 use App\Domain\User\Entity\AggregateRoot\UserCreateTrait;
-use App\Domain\User\Entity\AggregateRoot\UserDisablingTrait;
+use App\Domain\User\Entity\AggregateRoot\UserChangeAliveTrait;
 use App\Domain\User\Entity\AggregateRoot\UserSignInTrait;
 use App\Domain\User\ValueObj\Email;
 use App\Domain\User\ValueObj\Password;
@@ -19,7 +19,7 @@ class User extends EventSourcedAggregateRoot
     use UserCreateTrait;
     use UserSignInTrait;
     use UserChangeEmailTrait;
-    use UserDisablingTrait;
+    use UserChangeAliveTrait;
 
 
     /** @var UuidInterface */

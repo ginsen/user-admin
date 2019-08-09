@@ -33,10 +33,6 @@ class ObtainUuidFromEmail
             throw new InvalidCredentialsException('Invalid credentials entered.');
         }
 
-        if (!$userView->isActive()) {
-            throw new InvalidCredentialsException('User disabled.');
-        }
-
         return $userView->getUuid();
     }
 }

@@ -9,7 +9,7 @@ use Broadway\Serializer\Serializable;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
-class UserWasDisabled implements Serializable
+class UserAliveChanged implements Serializable
 {
     /** @var UuidInterface */
     public $uuid;

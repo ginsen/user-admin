@@ -12,6 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 abstract class CustomCommand extends Command
 {
     const FORMAT_DATE_TIME = 'd-m-Y H:i:s';
+    const FORCE_OPTION     = 'force';
 
 
     /** @var OutputInterface */
@@ -35,7 +36,7 @@ abstract class CustomCommand extends Command
         $this->initWatcher();
         $this->printIniDateTime();
         $this->createLogger($output);
-        $this->loadOptionGo($input);
+        $this->loadOptionForce($input);
 
         $run = parent::run($input, $output);
 
@@ -48,10 +49,10 @@ abstract class CustomCommand extends Command
     /**
      * @param InputInterface $input
      */
-    private function loadOptionGo(InputInterface $input): void
+    private function loadOptionForce(InputInterface $input): void
     {
-        if ($input->hasOption('go')) {
-            $this->dryRun = (bool) !$input->getOption('go');
+        if ($input->hasOption(self::FORCE_OPTION)) {
+            $this->dryRun = (bool) !$input->getOption(self::FORCE_OPTION);
 
             if ($this->dryRun) {
                 $this->logger->info('Dry run mode');
@@ -60,16 +61,21 @@ abstract class CustomCommand extends Command
     }
 
 
-    protected function addOptionGo(): void
+    protected function addOptionForce(): void
     {
-        $this->addOption('go', 'g', InputOption::VALUE_NONE, 'Do the stuff (updates)');
+        $this->addOption(
+            self::FORCE_OPTION,
+            null,
+            InputOption::VALUE_NONE,
+            'Perform this action successful, resource will change'
+        );
     }
 
 
     protected function isDryRun(): bool
     {
         if (null === $this->dryRun) {
-            throw new \BadMethodCallException('Dry run is not defined, put "addOptionGo()" in your app::configure()');
+            throw new \BadMethodCallException('Dry run is not defined, put "addOptionForce()" in your app::configure()');
         }
 
         return $this->dryRun;

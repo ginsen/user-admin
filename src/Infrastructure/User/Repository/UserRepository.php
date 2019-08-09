@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Infrastructure\User\Repository;
 
 use App\Domain\Common\Specification\SpecificationInterface;
-use App\Domain\User\Entity\UserViewInterface;
 use App\Domain\User\Repository\UserRepositoryInterface;
 use App\Infrastructure\Doctrine\ORM\MySqlRepository;
 use App\Infrastructure\User\Projection\UserView;
+use Broadway\ReadModel\SerializableReadModel;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query;
@@ -27,11 +27,11 @@ class UserRepository extends MySqlRepository implements UserRepositoryInterface
 
 
     /**
-     * @param  SpecificationInterface   $specification
+     * @param SpecificationInterface $specification
+     * @return SerializableReadModel|null
      * @throws NonUniqueResultException
-     * @return UserViewInterface|null
      */
-    public function getOneOrNull(SpecificationInterface $specification): ?UserViewInterface
+    public function getOneOrNull(SpecificationInterface $specification): ?SerializableReadModel
     {
         $query = $this->getOrmQuery($specification);
 

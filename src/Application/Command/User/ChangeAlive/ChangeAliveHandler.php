@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Command\User\DisableUser;
+namespace App\Application\Command\User\ChangeAlive;
 
 use App\Application\Command\CommandHandlerInterface;
 use App\Application\Service\ObtainUuidFromEmail;
 use App\Domain\User\Repository\UserEventStoreInterface;
 
-class DisableUserHandler implements CommandHandlerInterface
+class ChangeAliveHandler implements CommandHandlerInterface
 {
     /** @var ObtainUuidFromEmail */
     private $obtainUuid;
@@ -25,15 +25,15 @@ class DisableUserHandler implements CommandHandlerInterface
 
 
     /**
-     * @param  DisableUserCommand $command
+     * @param  ChangeAliveCommand $command
      * @throws \Exception
      */
-    public function __invoke(DisableUserCommand $command)
+    public function __invoke(ChangeAliveCommand $command)
     {
         $uuid = $this->obtainUuid->get($command->username);
         $user = $this->eventStore->get($uuid);
 
-        $user->disable();
+        $user->changeActive($command->active);
         $this->eventStore->store($user);
     }
 }

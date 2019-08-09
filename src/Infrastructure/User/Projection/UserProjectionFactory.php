@@ -6,7 +6,7 @@ namespace App\Infrastructure\User\Projection;
 
 use App\Domain\User\Event\UserEmailChanged;
 use App\Domain\User\Event\UserWasCreated;
-use App\Domain\User\Event\UserWasDisabled;
+use App\Domain\User\Event\UserAliveChanged;
 use App\Domain\User\Service\UserFinder;
 use App\Infrastructure\User\Repository\UserRepository;
 use Broadway\ReadModel\Projector;
@@ -55,10 +55,10 @@ class UserProjectionFactory extends Projector
 
 
     /**
-     * @param  UserWasDisabled $event
+     * @param  UserAliveChanged $event
      * @throws \Exception
      */
-    protected function applyUserWasDisabled(UserWasDisabled $event): void
+    protected function applyUserAliveChanged(UserAliveChanged $event): void
     {
         $userReadModel = $this->userFinder->findByUuid($event->uuid);
 

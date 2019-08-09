@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\UI\Cli\Command;
 
 use App\Application\Command\User\SignUp\SignUpCommand;
+use App\Application\Query\Item;
+use App\Application\Query\User\FindByEmail\FindByEmailQuery;
 use App\Domain\User\Entity\User;
 use App\Domain\User\ValueObj\Credentials;
 use App\UI\Cli\Command\Base\CustomCommand;
@@ -16,10 +18,13 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
-class CreateUserCommand extends CustomCommand
+class CreateUserCLICommand extends CustomCommand
 {
     /** @var CommandBus */
     private $commandBus;
+
+    /** @var CommandBus */
+    private $queryBus;
 
     /** @var string */
     private $password;
@@ -29,12 +34,14 @@ class CreateUserCommand extends CustomCommand
 
 
     /**
-     * CreateUserCommand constructor.
+     * CreateUserCLICommand constructor.
      * @param CommandBus $commandBus
+     * @param CommandBus $queryBus
      */
-    public function __construct(CommandBus $commandBus)
+    public function __construct(CommandBus $commandBus, CommandBus $queryBus)
     {
         $this->commandBus = $commandBus;
+        $this->queryBus   = $queryBus;
 
         parent::__construct();
     }
@@ -98,23 +105,27 @@ class CreateUserCommand extends CustomCommand
             $password = (string) $this->password
         );
 
-        $user = $this->commandBus->handle($command);
+        $this->commandBus->handle($command);
+
+        $query = new FindByEmailQuery($email);
+        $user = $this->queryBus->handle($query);
+
         $this->showUser($output, $user);
     }
 
 
     /**
      * @param OutputInterface $output
-     * @param User            $user
+     * @param Item $user
      */
-    private function showUser(OutputInterface $output, User $user): void
+    private function showUser(OutputInterface $output, Item $user): void
     {
         $output->writeln('');
 
         $table = new Table($output);
         $table->setHeaders(['', 'User Created']);
-        $table->addRow(['Uuid', $user->getUuid()->toString()]);
-        $table->addRow(['UserName', $user->getEmail()->toStr()]);
+        $table->addRow(['Uuid', $user->id]);
+        $table->addRow(['UserName', $user->resource['credentials']['email']]);
         $table->render();
     }
 }
