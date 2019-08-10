@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\User\Projection;
 
+use App\Domain\User\Entity\UserViewInterface;
 use App\Domain\User\ValueObj\Credentials;
 use App\Domain\User\ValueObj\Email;
 use App\Domain\User\ValueObj\Password;
-use Broadway\ReadModel\SerializableReadModel;
 use Broadway\Serializer\Serializable;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
-class UserView implements SerializableReadModel
+class UserView implements UserViewInterface
 {
     /** @var UuidInterface */
     protected $uuid;

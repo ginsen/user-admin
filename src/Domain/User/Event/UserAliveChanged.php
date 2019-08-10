@@ -55,7 +55,7 @@ class UserAliveChanged implements Serializable
 
         return new self(
             Uuid::fromString($data['uuid']),
-            (bool) $data['active'],
+            ('true' == $data['active']) ? true : false,
             new \DateTime($data['updated_at'])
         );
     }

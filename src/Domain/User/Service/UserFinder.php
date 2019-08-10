@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Domain\User\Service;
 
+use App\Domain\User\Entity\UserViewInterface;
 use App\Domain\User\Exception\Credentials\InvalidCredentialsException;
 use App\Domain\User\Repository\UserRepositoryInterface;
 use App\Domain\User\Specification\UserSpecificationFactoryInterface;
 use App\Domain\User\ValueObj\Email;
-use Broadway\ReadModel\SerializableReadModel;
 use Ramsey\Uuid\UuidInterface;
 
 class UserFinder
@@ -30,10 +30,10 @@ class UserFinder
 
 
     /**
-     * @param  Email                      $email
-     * @return SerializableReadModel|null
+     * @param  Email                  $email
+     * @return UserViewInterface|null
      */
-    public function findByEmail(Email $email): ?SerializableReadModel
+    public function findByEmail(Email $email): ?UserViewInterface
     {
         $specification = $this->specFactory->createForFindOneWithEmail($email);
         $user          = $this->userRepo->getOneOrNull($specification);
@@ -43,10 +43,11 @@ class UserFinder
 
 
     /**
-     * @param  UuidInterface         $uuid
-     * @return SerializableReadModel
+     * @param  UuidInterface     $uuid
+     * @throws \Exception
+     * @return UserViewInterface
      */
-    public function findByUuid(UuidInterface $uuid): SerializableReadModel
+    public function findByUuid(UuidInterface $uuid): UserViewInterface
     {
         $specification = $this->specFactory->createForFindOneWithUuid($uuid);
         $user          = $this->userRepo->getOneOrNull($specification);

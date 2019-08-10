@@ -119,6 +119,7 @@ class ChangeUserAliveCLICommand extends CustomCommand
         $table->setHeaders(['', 'User']);
         $table->addRow(['Uuid', $user->id]);
         $table->addRow(['UserName', $user->resource['credentials']['email']]);
+        $table->addRow(['Active', $user->resource['active']]);
         $table->render();
     }
 }
