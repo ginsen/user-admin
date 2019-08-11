@@ -24,7 +24,7 @@ class DateTime
 
 
     /**
-     * @param string $dateTime
+     * @param  string   $dateTime
      * @return DateTime
      */
     public static function fromStr(string $dateTime): self
@@ -34,7 +34,7 @@ class DateTime
 
 
     /**
-     * @param string $dateTime
+     * @param  string   $dateTime
      * @return DateTime
      */
     private static function create(string $dateTime = ''): self

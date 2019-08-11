@@ -44,7 +44,7 @@ class UserAliveChanged implements Serializable
 
 
     /**
-     * @param array $data
+     * @param  array            $data
      * @return UserAliveChanged
      */
     public static function deserialize(array $data): self

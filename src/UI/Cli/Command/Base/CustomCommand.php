@@ -123,7 +123,7 @@ abstract class CustomCommand extends Command
             return;
         }
 
-        if ($this->dryRun === true) {
+        if (true === $this->dryRun) {
             $this->output->writeln('<comment>Please run the operation with --force to execute</comment>');
         }
 

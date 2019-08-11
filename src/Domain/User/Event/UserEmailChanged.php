@@ -45,7 +45,7 @@ class UserEmailChanged implements Serializable
 
 
     /**
-     * @param array $data
+     * @param  array            $data
      * @return UserEmailChanged
      */
     public static function deserialize(array $data): self

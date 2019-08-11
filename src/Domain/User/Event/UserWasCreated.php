@@ -64,7 +64,7 @@ class UserWasCreated implements Serializable
 
 
     /**
-     * @param array $data
+     * @param  array          $data
      * @return UserWasCreated
      */
     public static function deserialize(array $data): self
