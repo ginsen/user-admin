@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\User\Event;
 
 use App\Domain\User\ValueObj\Credentials;
+use App\Domain\User\ValueObj\DateTime;
 use App\Domain\User\ValueObj\Email;
 use App\Domain\User\ValueObj\Password;
 use Assert\Assertion;
@@ -17,13 +18,16 @@ class UserWasCreated implements Serializable
     /** @var UuidInterface */
     public $uuid;
 
-    /** @var Credentials */
-    public $credentials;
+    /** @var Email */
+    public $email;
+
+    /** @var Password */
+    public $password;
 
     /** @var bool */
     public $active;
 
-    /** @var \DateTime */
+    /** @var DateTime */
     public $createdAt;
 
 
@@ -32,12 +36,13 @@ class UserWasCreated implements Serializable
      * @param UuidInterface $uuid
      * @param Credentials   $credentials
      * @param bool          $active
-     * @param \DateTime     $createdAt
+     * @param DateTime      $createdAt
      */
-    public function __construct(UuidInterface $uuid, Credentials $credentials, bool $active, \DateTime $createdAt)
+    public function __construct(UuidInterface $uuid, Credentials $credentials, bool $active, DateTime $createdAt)
     {
         $this->uuid        = $uuid;
-        $this->credentials = $credentials;
+        $this->email       = $credentials->email;
+        $this->password    = $credentials->password;
         $this->active      = $active;
         $this->createdAt   = $createdAt;
     }
@@ -49,37 +54,35 @@ class UserWasCreated implements Serializable
     public function serialize(): array
     {
         return [
-            'uuid'        => $this->uuid->toString(),
-            'credentials' => [
-                'email'    => $this->credentials->email->toStr(),
-                'password' => $this->credentials->password->toStr(),
-            ],
-            'active'     => ($this->active) ? 'true' : 'false',
-            'created_at' => $this->createdAt->format('Y-m-d H:i:s'),
+            'uuid'       => $this->uuid->toString(),
+            'email'      => $this->email->toStr(),
+            'password'   => $this->password->toStr(),
+            'active'     => $this->active,
+            'created_at' => $this->createdAt->toStr(),
         ];
     }
 
 
     /**
-     * @param  array          $data
-     * @throws \Exception
+     * @param array $data
      * @return UserWasCreated
      */
     public static function deserialize(array $data): self
     {
         Assertion::keyExists($data, 'uuid');
-        Assertion::keyExists($data, 'credentials');
+        Assertion::keyExists($data, 'email');
+        Assertion::keyExists($data, 'password');
         Assertion::keyExists($data, 'active');
         Assertion::keyExists($data, 'created_at');
 
         return new self(
             Uuid::fromString($data['uuid']),
             new Credentials(
-                Email::fromStr($data['credentials']['email']),
-                Password::fromHash($data['credentials']['password'])
+                Email::fromStr($data['email']),
+                Password::fromHash($data['password'])
             ),
-            (bool) $data['active'],
-            new \DateTime($data['created_at'])
+            $data['active'],
+            DateTime::fromStr($data['created_at'])
         );
     }
 }

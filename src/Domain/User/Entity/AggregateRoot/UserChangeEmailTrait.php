@@ -6,6 +6,7 @@ namespace App\Domain\User\Entity\AggregateRoot;
 
 use App\Domain\User\Event\UserEmailChanged;
 use App\Domain\User\Specification\UniqueEmailSpecificationInterface;
+use App\Domain\User\ValueObj\DateTime;
 use App\Domain\User\ValueObj\Email;
 use Assert\Assertion;
 
@@ -20,7 +21,7 @@ trait UserChangeEmailTrait
     ): void {
         $uniqueEmailSpecification->isUnique($email);
 
-        $this->apply(new UserEmailChanged($this->uuid, $email, new \DateTime()));
+        $this->apply(new UserEmailChanged($this->uuid, $email, DateTime::now()));
     }
 
 

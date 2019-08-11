@@ -7,6 +7,7 @@ namespace App\Domain\User\Entity\AggregateRoot;
 use App\Domain\User\Event\UserWasCreated;
 use App\Domain\User\Specification\UniqueEmailSpecificationInterface;
 use App\Domain\User\ValueObj\Credentials;
+use App\Domain\User\ValueObj\DateTime;
 use Ramsey\Uuid\UuidInterface;
 
 trait UserCreateTrait
@@ -18,11 +19,9 @@ trait UserCreateTrait
     ): self {
         $uniqueEmailSpecification->isUnique($credentials->email);
 
-        $active    = true;
-        $createdAt = new \DateTime();
-
         $user = new self();
-        $user->apply(new UserWasCreated($uuid, $credentials, $active, $createdAt));
+
+        $user->apply(new UserWasCreated($uuid, $credentials, true, DateTime::now()));
 
         return $user;
     }
@@ -32,8 +31,8 @@ trait UserCreateTrait
     {
         $this->uuid = $event->uuid;
 
-        $this->setEmail($event->credentials->email);
-        $this->setPassword($event->credentials->password);
+        $this->setEmail($event->email);
+        $this->setPassword($event->password);
         $this->setActive($event->active);
         $this->setCreatedAt($event->createdAt);
     }

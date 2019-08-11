@@ -8,6 +8,7 @@ use App\Domain\User\Entity\AggregateRoot\UserChangeAliveTrait;
 use App\Domain\User\Entity\AggregateRoot\UserChangeEmailTrait;
 use App\Domain\User\Entity\AggregateRoot\UserCreateTrait;
 use App\Domain\User\Entity\AggregateRoot\UserSignInTrait;
+use App\Domain\User\ValueObj\DateTime;
 use App\Domain\User\ValueObj\Email;
 use App\Domain\User\ValueObj\Password;
 use Broadway\EventSourcing\EventSourcedAggregateRoot;
@@ -34,10 +35,10 @@ class User extends EventSourcedAggregateRoot
     /** @var bool */
     protected $active;
 
-    /** @var \DateTime */
+    /** @var DateTime */
     protected $createdAt;
 
-    /** @var \DateTime|null */
+    /** @var DateTime|null */
     protected $updatedAt;
 
 
@@ -114,18 +115,18 @@ class User extends EventSourcedAggregateRoot
 
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setCreatedAt(DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
 
     /**
-     * @param \DateTime|null $updatedAt
+     * @param DateTime|null $updatedAt
      */
-    public function setUpdatedAt(?\DateTime $updatedAt): void
+    public function setUpdatedAt(?DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }

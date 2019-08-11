@@ -123,6 +123,10 @@ abstract class CustomCommand extends Command
             return;
         }
 
+        if ($this->dryRun === true) {
+            $this->output->writeln('<comment>Please run the operation with --force to execute</comment>');
+        }
+
         $this->output->writeln('');
         $this->output->writeln('End: <info>' . date(self::FORMAT_DATE_TIME) . '</info>');
         $this->output->writeln('Total time: <comment>' . ($event->getDuration() / 1000) . '</comment> seg.');

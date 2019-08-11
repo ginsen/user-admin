@@ -6,6 +6,7 @@ namespace App\Infrastructure\User\Projection;
 
 use App\Domain\User\Entity\UserViewInterface;
 use App\Domain\User\ValueObj\Credentials;
+use App\Domain\User\ValueObj\DateTime;
 use App\Domain\User\ValueObj\Email;
 use App\Domain\User\ValueObj\Password;
 use Broadway\Serializer\Serializable;
@@ -23,10 +24,10 @@ class UserView implements UserViewInterface
     /** @var bool */
     protected $active;
 
-    /** @var \DateTime */
+    /** @var DateTime */
     protected $createdAt;
 
-    /** @var \DateTime|null */
+    /** @var DateTime|null */
     protected $updatedAt;
 
 
@@ -121,36 +122,36 @@ class UserView implements UserViewInterface
 
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt(): \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setCreatedAt(DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getUpdatedAt(): ?\DateTime
+    public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt;
     }
 
 
     /**
-     * @param \DateTime|null $updatedAt
+     * @param DateTime|null $updatedAt
      */
-    public function setUpdatedAt(?\DateTime $updatedAt): void
+    public function setUpdatedAt(?DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -178,13 +179,13 @@ class UserView implements UserViewInterface
 
         $instance->uuid        = Uuid::fromString($data['uuid']);
         $instance->credentials = new Credentials(
-            Email::fromStr($data['credentials']['email']),
-            Password::fromHash($data['credentials']['password'] ?? '')
+            Email::fromStr($data['email']),
+            Password::fromHash($data['password'] ?? '')
         );
 
-        $instance->active    = (bool) $data['active'];
-        $instance->createdAt = new \DateTime($data['created_at']);
-        $instance->updatedAt = isset($data['updated_at']) ? new \DateTime($data['updated_at']) : null;
+        $instance->active    = $data['active'];
+        $instance->createdAt = DateTime::fromStr($data['created_at']);
+        $instance->updatedAt = isset($data['updated_at']) ? DateTime::fromStr($data['updated_at']) : null;
 
         return $instance;
     }
@@ -200,7 +201,7 @@ class UserView implements UserViewInterface
             'credentials' => [
                 'email' => (string) $this->credentials->email,
             ],
-            'active' => ($this->active) ? 'true' : 'false',
+            'active' => $this->active,
         ];
     }
 }

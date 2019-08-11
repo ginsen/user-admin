@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\User\Event;
 
+use App\Domain\User\ValueObj\DateTime;
 use Assert\Assertion;
 use Broadway\Serializer\Serializable;
 use Ramsey\Uuid\Uuid;
@@ -17,11 +18,11 @@ class UserAliveChanged implements Serializable
     /** @var bool */
     public $active;
 
-    /** @var \DateTime */
+    /** @var DateTime */
     public $updatedAt;
 
 
-    public function __construct(UuidInterface $uuid, bool $active, \DateTime $updatedAt)
+    public function __construct(UuidInterface $uuid, bool $active, DateTime $updatedAt)
     {
         $this->uuid      = $uuid;
         $this->active    = $active;
@@ -36,16 +37,15 @@ class UserAliveChanged implements Serializable
     {
         return [
             'uuid'       => $this->uuid->toString(),
-            'active'     => ($this->active) ? 'true' : 'false',
-            'updated_at' => $this->updatedAt->format('Y-m-d H:i:s'),
+            'active'     => $this->active,
+            'updated_at' => $this->updatedAt->toStr(),
         ];
     }
 
 
     /**
-     * @param  array      $data
-     * @throws \Exception
-     * @return self
+     * @param array $data
+     * @return UserAliveChanged
      */
     public static function deserialize(array $data): self
     {
@@ -55,8 +55,8 @@ class UserAliveChanged implements Serializable
 
         return new self(
             Uuid::fromString($data['uuid']),
-            ('true' == $data['active']) ? true : false,
-            new \DateTime($data['updated_at'])
+            $data['active'],
+            DateTime::fromStr($data['updated_at'])
         );
     }
 }

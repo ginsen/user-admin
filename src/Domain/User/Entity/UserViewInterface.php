@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\User\Entity;
 
 use App\Domain\User\ValueObj\Credentials;
+use App\Domain\User\ValueObj\DateTime;
 use App\Domain\User\ValueObj\Email;
 use App\Domain\User\ValueObj\Password;
 use Broadway\ReadModel\SerializableReadModel;
@@ -30,11 +31,11 @@ interface UserViewInterface extends SerializableReadModel
 
     public function setActive(bool $active): void;
 
-    public function getCreatedAt(): \DateTime;
+    public function getCreatedAt(): DateTime;
 
-    public function setCreatedAt(\DateTime $createdAt): void;
+    public function setCreatedAt(DateTime $createdAt): void;
 
-    public function getUpdatedAt(): ?\DateTime;
+    public function getUpdatedAt(): ?DateTime;
 
-    public function setUpdatedAt(?\DateTime $updatedAt): void;
+    public function setUpdatedAt(?DateTime $updatedAt): void;
 }

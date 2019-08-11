@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\User\Event;
 
+use App\Domain\User\ValueObj\DateTime;
 use App\Domain\User\ValueObj\Email;
 use Assert\Assertion;
 use Broadway\Serializer\Serializable;
@@ -18,11 +19,11 @@ class UserEmailChanged implements Serializable
     /** @var Email */
     public $email;
 
-    // @var \DateTime
+    /** @var DateTime */
     public $updatedAt;
 
 
-    public function __construct(UuidInterface $uuid, Email $email, \DateTime $updatedAt)
+    public function __construct(UuidInterface $uuid, Email $email, DateTime $updatedAt)
     {
         $this->uuid      = $uuid;
         $this->email     = $email;
@@ -38,15 +39,14 @@ class UserEmailChanged implements Serializable
         return [
             'uuid'       => $this->uuid->toString(),
             'email'      => $this->email->toStr(),
-            'updated_at' => $this->updatedAt->format('Y-m-d H:i:s'),
+            'updated_at' => $this->updatedAt->toStr(),
         ];
     }
 
 
     /**
-     * @param  array      $data
-     * @throws \Exception
-     * @return self
+     * @param array $data
+     * @return UserEmailChanged
      */
     public static function deserialize(array $data): self
     {
@@ -56,7 +56,7 @@ class UserEmailChanged implements Serializable
         return new self(
             Uuid::fromString($data['uuid']),
             Email::fromStr($data['email']),
-            new \DateTime($data['updated_at'])
+            DateTime::fromStr($data['updated_at'])
         );
     }
 }
