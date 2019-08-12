@@ -7,20 +7,20 @@ namespace App\Infrastructure\User\Projection;
 use App\Domain\User\Event\UserAliveChanged;
 use App\Domain\User\Event\UserEmailChanged;
 use App\Domain\User\Event\UserWasCreated;
+use App\Domain\User\Repository\UserRepositoryInterface;
 use App\Domain\User\Service\UserFinder;
-use App\Infrastructure\User\Repository\UserRepository;
 use Broadway\ReadModel\Projector;
 
 class UserProjectionFactory extends Projector
 {
-    /** @var UserRepository */
+    /** @var UserRepositoryInterface */
     private $repository;
 
     /** @var UserFinder */
     private $userFinder;
 
 
-    public function __construct(UserRepository $repository, UserFinder $userFinder)
+    public function __construct(UserRepositoryInterface $repository, UserFinder $userFinder)
     {
         $this->repository = $repository;
         $this->userFinder = $userFinder;
@@ -50,7 +50,7 @@ class UserProjectionFactory extends Projector
         $userReadModel->setEmail($event->email);
         $userReadModel->setUpdatedAt($event->updatedAt);
 
-        $this->repository->save($userReadModel);
+        $this->repository->update($userReadModel);
     }
 
 
@@ -65,6 +65,6 @@ class UserProjectionFactory extends Projector
         $userReadModel->setActive($event->active);
         $userReadModel->setUpdatedAt($event->updatedAt);
 
-        $this->repository->save($userReadModel);
+        $this->repository->update($userReadModel);
     }
 }
