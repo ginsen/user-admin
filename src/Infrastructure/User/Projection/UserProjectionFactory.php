@@ -20,9 +20,9 @@ class UserProjectionFactory extends Projector
     private $userFinder;
 
 
-    public function __construct(UserRepositoryInterface $repository, UserFinder $userFinder)
+    public function __construct(UserRepositoryInterface $userRepo, UserFinder $userFinder)
     {
-        $this->repository = $repository;
+        $this->repository = $userRepo;
         $this->userFinder = $userFinder;
     }
 
