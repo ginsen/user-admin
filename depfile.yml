@@ -17,12 +17,12 @@ layers:
   - name: Infrastructure
     collectors:
       - type: className
-        regex: App\\Infrastructure\\.*
+        regex: App\\Infrastructure\\[^Tests\\].*
 
   - name: Domain
     collectors:
       - type: className
-        regex: App\\Domain\\.*
+        regex: App\\Domain\\[^Tests\\].*
 
 ruleset:
   # DDD layers
