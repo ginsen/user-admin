@@ -25,6 +25,7 @@
     <testsuites>
         <testsuite name="Project Test Suite">
             <directory>src/Domain/Tests</directory>
+            <directory>src/Infrastructure/Tests</directory>
         </testsuite>
     </testsuites>
 
@@ -33,6 +34,7 @@
             <directory>src</directory>
             <exclude>
                 <directory>src/Domain/Tests</directory>
+                <directory>src/Infrastructure/Tests</directory>
             </exclude>
         </whitelist>
     </filter>

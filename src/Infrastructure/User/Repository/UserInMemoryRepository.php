@@ -8,6 +8,8 @@ use App\Domain\Common\Specification\SpecificationInterface;
 use App\Domain\User\Entity\UserViewInterface;
 use App\Domain\User\Repository\UserRepositoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\NonUniqueResultException;
 
 class UserInMemoryRepository implements UserRepositoryInterface
 {
@@ -18,14 +20,29 @@ class UserInMemoryRepository implements UserRepositoryInterface
         $this->entities = new ArrayCollection();
     }
 
+
+    /**
+     * @param SpecificationInterface $specification
+     * @return UserViewInterface|null
+     * @throws \Exception
+     */
     public function getOneOrNull(SpecificationInterface $specification): ?UserViewInterface
     {
-        $entity = null;
-        dump($specification->getConditions());
-        dump($specification->getParameters());
+        $criteria   = $this->getCriteria($specification);
+        $collection = $this->entities->matching($criteria);
 
-        return $entity;
+        if (count($collection) > 1) {
+            throw new NonUniqueResultException();
+        }
+
+        if (count($collection) == 0) {
+            return null;
+        }
+
+        $elements = current($collection);
+        return current($elements);
     }
+
 
     /**
      * @param UserViewInterface $obj
@@ -55,5 +72,16 @@ class UserInMemoryRepository implements UserRepositoryInterface
     public function remove($obj, $flush = true): void
     {
         $this->entities->remove($obj->getUuid()->toString());
+    }
+
+
+    /**
+     * @param SpecificationInterface $specification
+     * @return Criteria
+     */
+    protected function getCriteria(SpecificationInterface $specification): Criteria
+    {
+        $criteria = Criteria::create();
+        return $criteria->where($specification->getConditions());
     }
 }

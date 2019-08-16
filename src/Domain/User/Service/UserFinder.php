@@ -22,10 +22,10 @@ class UserFinder
 
     public function __construct(
         UserRepositoryInterface $userRepo,
-        UserSpecificationFactoryInterface $specFactory
+        UserSpecificationFactoryInterface $userSpecFactory
     ) {
         $this->userRepo    = $userRepo;
-        $this->specFactory = $specFactory;
+        $this->specFactory = $userSpecFactory;
     }
 
 

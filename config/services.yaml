@@ -16,6 +16,7 @@ services:
             $eventBus:   '@broadway.event_handling.event_bus'
             $eventStore: '@broadway.event_store.dbal'
             $userRepo:    App\Infrastructure\User\Repository\UserRepository
+            $userSpecFactory: App\Infrastructure\User\Specification\Factory\OrmUserSpecificationFactory
 
 
     _instanceof:
