@@ -23,6 +23,6 @@ class UserWithEmail extends CollectionSpecification
 
     public function getConditions()
     {
-        return $this->expr->eq('user.credentials.email', $this->email);
+        return $this->expr->eq('email', $this->email);
     }
 }
