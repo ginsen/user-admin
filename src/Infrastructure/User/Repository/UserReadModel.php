@@ -6,14 +6,14 @@ namespace App\Infrastructure\User\Repository;
 
 use App\Domain\Common\Specification\SpecificationInterface;
 use App\Domain\User\Entity\UserViewInterface;
-use App\Domain\User\Repository\UserRepositoryInterface;
+use App\Domain\User\Repository\UserReadModelInterface;
 use App\Infrastructure\Doctrine\ORM\MySqlRepository;
 use App\Infrastructure\User\Projection\UserView;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query;
 
-class UserRepository extends MySqlRepository implements UserRepositoryInterface
+class UserReadModel extends MySqlRepository implements UserReadModelInterface
 {
     /**
      * UserRepository constructor.

@@ -6,56 +6,56 @@ namespace App\Domain\User\Service;
 
 use App\Domain\User\Entity\UserViewInterface;
 use App\Domain\User\Exception\Credentials\InvalidCredentialsException;
-use App\Domain\User\Repository\UserRepositoryInterface;
+use App\Domain\User\Repository\UserReadModelInterface;
 use App\Domain\User\Specification\UserSpecificationFactoryInterface;
 use App\Domain\User\ValueObj\Email;
 use Ramsey\Uuid\UuidInterface;
 
 class UserFinder
 {
-    /** @var UserRepositoryInterface */
-    private $userRepo;
+    /** @var UserReadModelInterface */
+    private $readModel;
 
     /** @var UserSpecificationFactoryInterface */
     private $specFactory;
 
 
     public function __construct(
-        UserRepositoryInterface $userRepo,
+        UserReadModelInterface $userReadModel,
         UserSpecificationFactoryInterface $userSpecFactory
     ) {
-        $this->userRepo    = $userRepo;
+        $this->readModel   = $userReadModel;
         $this->specFactory = $userSpecFactory;
     }
 
 
     /**
-     * @param  Email                  $email
+     * @param  Email $email
      * @return UserViewInterface|null
      */
     public function findByEmail(Email $email): ?UserViewInterface
     {
         $specification = $this->specFactory->createForFindOneWithEmail($email);
-        $user          = $this->userRepo->getOneOrNull($specification);
+        $userView      = $this->readModel->getOneOrNull($specification);
 
-        return $user;
+        return $userView;
     }
 
 
     /**
-     * @param  UuidInterface     $uuid
+     * @param  UuidInterface $uuid
      * @throws \Exception
      * @return UserViewInterface
      */
     public function findByUuid(UuidInterface $uuid): UserViewInterface
     {
         $specification = $this->specFactory->createForFindOneWithUuid($uuid);
-        $user          = $this->userRepo->getOneOrNull($specification);
+        $userView      = $this->readModel->getOneOrNull($specification);
 
-        if (null === $user) {
+        if (null === $userView) {
             throw new InvalidCredentialsException('Invalid uuid entered.');
         }
 
-        return $user;
+        return $userView;
     }
 }

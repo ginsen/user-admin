@@ -6,12 +6,12 @@ namespace App\Infrastructure\User\Repository;
 
 use App\Domain\Common\Specification\SpecificationInterface;
 use App\Domain\User\Entity\UserViewInterface;
-use App\Domain\User\Repository\UserRepositoryInterface;
+use App\Domain\User\Repository\UserReadModelInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\NonUniqueResultException;
 
-class UserInMemoryRepository implements UserRepositoryInterface
+class UserInMemoryReadModel implements UserReadModelInterface
 {
     protected $entities;
 

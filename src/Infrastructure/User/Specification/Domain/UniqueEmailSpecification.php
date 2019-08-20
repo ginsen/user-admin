@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace App\Infrastructure\User\Specification\Domain;
 
 use App\Domain\User\Exception\Email\EmailAlreadyExistException;
+use App\Domain\User\Repository\UserReadModelInterface;
 use App\Domain\User\Specification\UniqueEmailSpecificationInterface;
 use App\Domain\User\Specification\UserSpecificationFactoryInterface;
 use App\Domain\User\ValueObj\Email;
 use App\Infrastructure\User\Projection\UserView;
-use App\Infrastructure\User\Repository\UserRepository;
 use Doctrine\ORM\NonUniqueResultException;
 
 class UniqueEmailSpecification implements UniqueEmailSpecificationInterface
 {
-    /** @var UserRepository */
-    private $userRepo;
+    /** @var UserReadModelInterface */
+    private $readModel;
 
     /** @var UserSpecificationFactoryInterface */
     private $specFactory;
@@ -24,14 +24,14 @@ class UniqueEmailSpecification implements UniqueEmailSpecificationInterface
     /**
      * UniqueEmailSpecification constructor.
      *
-     * @param UserRepository                    $userRepo
+     * @param UserReadModelInterface            $userReadModel
      * @param UserSpecificationFactoryInterface $userSpecFactory
      */
     public function __construct(
-        UserRepository $userRepo,
+        UserReadModelInterface $userReadModel,
         UserSpecificationFactoryInterface $userSpecFactory
     ) {
-        $this->userRepo    = $userRepo;
+        $this->readModel   = $userReadModel;
         $this->specFactory = $userSpecFactory;
     }
 
@@ -46,9 +46,9 @@ class UniqueEmailSpecification implements UniqueEmailSpecificationInterface
     {
         try {
             $specification = $this->specFactory->createForFindOneWithEmail($value);
-            $authUser      = $this->userRepo->getOneOrNull($specification);
+            $userView      = $this->readModel->getOneOrNull($specification);
 
-            if ($authUser instanceof UserView) {
+            if ($userView instanceof UserView) {
                 throw new EmailAlreadyExistException('Email already registered.');
             }
         } catch (NonUniqueResultException $e) {

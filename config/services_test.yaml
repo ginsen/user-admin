@@ -15,8 +15,9 @@ services:
             $commandBus: '@tactician.commandbus.command'
             $eventBus:   '@broadway.event_handling.event_bus'
             $eventStore: '@broadway.event_store.in_memory'
-            $userRepo:    App\Infrastructure\User\Repository\UserInMemoryRepository
-            $userSpecFactory: App\Infrastructure\User\Specification\Factory\CollectionUserSpecificationFactory
+
+            $userReadModel:   '@App\Infrastructure\User\Repository\UserInMemoryReadModel'
+            $userSpecFactory: '@App\Infrastructure\User\Specification\Factory\CollectionUserSpecificationFactory'
 
 
     _instanceof:

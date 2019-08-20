@@ -7,22 +7,22 @@ namespace App\Infrastructure\User\Projection;
 use App\Domain\User\Event\UserAliveChanged;
 use App\Domain\User\Event\UserEmailChanged;
 use App\Domain\User\Event\UserWasCreated;
-use App\Domain\User\Repository\UserRepositoryInterface;
+use App\Domain\User\Repository\UserReadModelInterface;
 use App\Domain\User\Service\UserFinder;
 use Broadway\ReadModel\Projector;
 
 class UserProjectionFactory extends Projector
 {
-    /** @var UserRepositoryInterface */
-    private $repository;
+    /** @var UserReadModelInterface */
+    private $readModel;
 
     /** @var UserFinder */
     private $userFinder;
 
 
-    public function __construct(UserRepositoryInterface $userRepo, UserFinder $userFinder)
+    public function __construct(UserReadModelInterface $userReadModel, UserFinder $userFinder)
     {
-        $this->repository = $userRepo;
+        $this->readModel  = $userReadModel;
         $this->userFinder = $userFinder;
     }
 
@@ -33,9 +33,9 @@ class UserProjectionFactory extends Projector
      */
     protected function applyUserWasCreated(UserWasCreated $event): void
     {
-        $userReadModel = UserView::fromSerializable($event);
+        $userView = UserView::fromSerializable($event);
 
-        $this->repository->save($userReadModel);
+        $this->readModel->save($userView);
     }
 
 
@@ -45,12 +45,12 @@ class UserProjectionFactory extends Projector
      */
     protected function applyUserEmailChanged(UserEmailChanged $event): void
     {
-        $userReadModel = $this->userFinder->findByUuid($event->uuid);
+        $userView = $this->userFinder->findByUuid($event->uuid);
 
-        $userReadModel->setEmail($event->email);
-        $userReadModel->setUpdatedAt($event->updatedAt);
+        $userView->setEmail($event->email);
+        $userView->setUpdatedAt($event->updatedAt);
 
-        $this->repository->update($userReadModel);
+        $this->readModel->update($userView);
     }
 
 
@@ -60,11 +60,11 @@ class UserProjectionFactory extends Projector
      */
     protected function applyUserAliveChanged(UserAliveChanged $event): void
     {
-        $userReadModel = $this->userFinder->findByUuid($event->uuid);
+        $userView = $this->userFinder->findByUuid($event->uuid);
 
-        $userReadModel->setActive($event->active);
-        $userReadModel->setUpdatedAt($event->updatedAt);
+        $userView->setActive($event->active);
+        $userView->setUpdatedAt($event->updatedAt);
 
-        $this->repository->update($userReadModel);
+        $this->readModel->update($userView);
     }
 }

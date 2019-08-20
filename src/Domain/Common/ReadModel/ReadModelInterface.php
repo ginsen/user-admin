@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Common\PersistLayer;
+namespace App\Domain\Common\ReadModel;
 
-interface PersistLayerInterface
+interface ReadModelInterface
 {
     public function save($obj, bool $flush = true, bool $clear = false): void;
 

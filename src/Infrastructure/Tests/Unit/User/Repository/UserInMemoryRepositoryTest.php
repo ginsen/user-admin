@@ -8,7 +8,7 @@ use App\Domain\User\ValueObj\DateTime;
 use App\Domain\User\ValueObj\Email;
 use App\Domain\User\ValueObj\Password;
 use App\Infrastructure\User\Projection\UserView;
-use App\Infrastructure\User\Repository\UserInMemoryRepository;
+use App\Infrastructure\User\Repository\UserInMemoryReadModel;
 use App\Infrastructure\User\Specification\Factory\CollectionUserSpecificationFactory;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
@@ -21,13 +21,13 @@ class UserInMemoryRepositoryTest extends TestCase
      */
     public function it_should_return_one_user_view_by_uuid()
     {
-        $userView = $this->createUserView();
-        $repo     = new UserInMemoryRepository();
-        $repo->save($userView);
+        $userView  = $this->createUserView();
+        $readModel = new UserInMemoryReadModel();
+        $readModel->save($userView);
 
         $specFactory   = new CollectionUserSpecificationFactory();
         $specification = $specFactory->createForFindOneWithUuid($userView->getUuid());
-        $item = $repo->getOneOrNull($specification);
+        $item = $readModel->getOneOrNull($specification);
 
         self::assertInstanceOf(UserView::class, $item);
     }
@@ -39,13 +39,13 @@ class UserInMemoryRepositoryTest extends TestCase
      */
     public function it_should_return_null_when_uuid_not_exist()
     {
-        $userView = $this->createUserView();
-        $repo     = new UserInMemoryRepository();
-        $repo->save($userView);
+        $userView  = $this->createUserView();
+        $readModel = new UserInMemoryReadModel();
+        $readModel->save($userView);
 
         $specFactory   = new CollectionUserSpecificationFactory();
         $specification = $specFactory->createForFindOneWithUuid(Uuid::uuid4());
-        $item = $repo->getOneOrNull($specification);
+        $item = $readModel->getOneOrNull($specification);
 
         self::assertNull($item);
     }
@@ -57,13 +57,13 @@ class UserInMemoryRepositoryTest extends TestCase
      */
     public function it_should_return_one_user_view_by_email()
     {
-        $userView = $this->createUserView();
-        $repo     = new UserInMemoryRepository();
-        $repo->save($userView);
+        $userView  = $this->createUserView();
+        $readModel = new UserInMemoryReadModel();
+        $readModel->save($userView);
 
         $specFactory   = new CollectionUserSpecificationFactory();
         $specification = $specFactory->createForFindOneWithEmail($userView->getEmail());
-        $item = $repo->getOneOrNull($specification);
+        $item = $readModel->getOneOrNull($specification);
 
         self::assertEquals($userView, $item);
     }
@@ -75,13 +75,13 @@ class UserInMemoryRepositoryTest extends TestCase
      */
     public function it_should_return_null_when_email_not_exist()
     {
-        $userView = $this->createUserView();
-        $repo     = new UserInMemoryRepository();
-        $repo->save($userView);
+        $userView  = $this->createUserView();
+        $readModel = new UserInMemoryReadModel();
+        $readModel->save($userView);
 
         $specFactory   = new CollectionUserSpecificationFactory();
         $specification = $specFactory->createForFindOneWithEmail(Email::fromStr('notexist@test.com'));
-        $item = $repo->getOneOrNull($specification);
+        $item = $readModel->getOneOrNull($specification);
 
         self::assertNull($item);
     }

@@ -9,7 +9,7 @@ use App\Domain\User\ValueObj\DateTime;
 use App\Domain\User\ValueObj\Email;
 use App\Domain\User\ValueObj\Password;
 use App\Infrastructure\User\Projection\UserView;
-use App\Infrastructure\User\Repository\UserInMemoryRepository;
+use App\Infrastructure\User\Repository\UserInMemoryReadModel;
 use App\Infrastructure\User\Specification\Factory\CollectionUserSpecificationFactory;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
@@ -22,13 +22,13 @@ class UserFinderTest extends TestCase
      */
     public function it_should_find_by_uuid()
     {
-        $userView = $this->createUserView();
-        $userRepo = new UserInMemoryRepository();
-        $userRepo->save($userView);
+        $userView  = $this->createUserView();
+        $readModel = new UserInMemoryReadModel();
+        $readModel->save($userView);
 
         $specFactory = new CollectionUserSpecificationFactory();
 
-        $finder = new UserFinder($userRepo, $specFactory);
+        $finder = new UserFinder($readModel, $specFactory);
 
         $item = $finder->findByUuid($userView->getUuid());
         self::assertEquals($userView, $item);
@@ -41,13 +41,13 @@ class UserFinderTest extends TestCase
      */
     public function it_should_find_by_email()
     {
-        $userView = $this->createUserView();
-        $userRepo = new UserInMemoryRepository();
-        $userRepo->save($userView);
+        $userView  = $this->createUserView();
+        $readModel = new UserInMemoryReadModel();
+        $readModel->save($userView);
 
         $specFactory = new CollectionUserSpecificationFactory();
 
-        $finder = new UserFinder($userRepo, $specFactory);
+        $finder = new UserFinder($readModel, $specFactory);
 
         $item = $finder->findByEmail($userView->getEmail());
         self::assertEquals($userView, $item);
