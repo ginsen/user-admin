@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+ * Change Repository for ReadModel classes.
  * Add UserInMemoryRepository to test environment.
  * Add command CLI for enable/disable user.
  * Add new Api method to change email user.
