@@ -13,7 +13,7 @@ use App\Infrastructure\User\Specification\Factory\CollectionUserSpecificationFac
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
-class UserInMemoryRepositoryTest extends TestCase
+class UserInMemoryReadModelTest extends TestCase
 {
     /**
      * @test
