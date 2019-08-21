@@ -46,7 +46,7 @@ class UserAliveChangedTest extends TestCase
             'updated_at' => $dateTime->toStr(),
         ];
 
-        self::assertEquals($expected, $data);
+        self::assertSame($expected, $data);
     }
 
 
@@ -68,8 +68,8 @@ class UserAliveChangedTest extends TestCase
 
         $event = UserAliveChanged::deserialize($data);
 
-        self::assertEquals($event->uuid, $uuid);
-        self::assertEquals($event->active, $active);
-        self::assertEquals($event->updatedAt, $dateTime);
+        self::assertSame($event->uuid->toString(), $uuid->toString());
+        self::assertSame($event->active, $active);
+        self::assertSame($event->updatedAt->toStr(), $dateTime->toStr());
     }
 }

@@ -48,7 +48,7 @@ class UserEmailChangedTest extends TestCase
             'updated_at' => $dateTime->toStr(),
         ];
 
-        self::assertEquals($expected, $data);
+        self::assertSame($expected, $data);
     }
 
 
@@ -70,8 +70,8 @@ class UserEmailChangedTest extends TestCase
 
         $event = UserEmailChanged::deserialize($data);
 
-        self::assertEquals($event->uuid, $uuid);
-        self::assertEquals($event->email, $email);
-        self::assertEquals($event->updatedAt, $dateTime);
+        self::assertSame($event->uuid->toString(), $uuid->toString());
+        self::assertSame($event->email->toStr(), $email->toStr());
+        self::assertSame($event->updatedAt->toStr(), $dateTime->toStr());
     }
 }

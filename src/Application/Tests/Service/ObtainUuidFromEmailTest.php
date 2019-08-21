@@ -34,9 +34,9 @@ class ObtainUuidFromEmailTest extends TestCase
 
 
     /**
-     * @param Email $email
-     * @return UserFinder
+     * @param  Email      $email
      * @throws \Exception
+     * @return UserFinder
      */
     protected function getUserFinderFake(Email $email): UserFinder
     {
@@ -50,9 +50,9 @@ class ObtainUuidFromEmailTest extends TestCase
 
 
     /**
-     * @param Email $email
-     * @return UserView
+     * @param  Email      $email
      * @throws \Exception
+     * @return UserView
      */
     protected function createUserView(Email $email): UserView
     {

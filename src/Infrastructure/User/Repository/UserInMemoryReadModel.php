@@ -22,32 +22,33 @@ class UserInMemoryReadModel implements UserReadModelInterface
 
 
     /**
-     * @param SpecificationInterface $specification
-     * @return UserViewInterface|null
+     * @param  SpecificationInterface $specification
      * @throws \Exception
+     * @return UserViewInterface|null
      */
     public function getOneOrNull(SpecificationInterface $specification): ?UserViewInterface
     {
         $criteria   = $this->getCriteria($specification);
         $collection = $this->entities->matching($criteria);
 
-        if (count($collection) > 1) {
+        if (\count($collection) > 1) {
             throw new NonUniqueResultException();
         }
 
-        if (count($collection) == 0) {
+        if (0 == \count($collection)) {
             return null;
         }
 
         $elements = current($collection);
+
         return current($elements);
     }
 
 
     /**
      * @param UserViewInterface $obj
-     * @param bool $flush
-     * @param bool $clear
+     * @param bool              $flush
+     * @param bool              $clear
      */
     public function save($obj, bool $flush = true, bool $clear = false): void
     {
@@ -57,7 +58,7 @@ class UserInMemoryReadModel implements UserReadModelInterface
 
     /**
      * @param UserViewInterface $obj
-     * @param bool $flush
+     * @param bool              $flush
      */
     public function update($obj, bool $flush = true): void
     {
@@ -67,7 +68,7 @@ class UserInMemoryReadModel implements UserReadModelInterface
 
     /**
      * @param UserViewInterface $obj
-     * @param bool $flush
+     * @param bool              $flush
      */
     public function remove($obj, $flush = true): void
     {
@@ -76,12 +77,13 @@ class UserInMemoryReadModel implements UserReadModelInterface
 
 
     /**
-     * @param SpecificationInterface $specification
+     * @param  SpecificationInterface $specification
      * @return Criteria
      */
     protected function getCriteria(SpecificationInterface $specification): Criteria
     {
         $criteria = Criteria::create();
+
         return $criteria->where($specification->getConditions());
     }
 }

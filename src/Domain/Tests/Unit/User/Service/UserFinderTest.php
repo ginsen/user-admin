@@ -31,7 +31,7 @@ class UserFinderTest extends TestCase
         $finder = new UserFinder($readModel, $specFactory);
 
         $item = $finder->findByUuid($userView->getUuid());
-        self::assertEquals($userView, $item);
+        self::assertSame($userView, $item);
     }
 
 
@@ -50,13 +50,13 @@ class UserFinderTest extends TestCase
         $finder = new UserFinder($readModel, $specFactory);
 
         $item = $finder->findByEmail($userView->getEmail());
-        self::assertEquals($userView, $item);
+        self::assertSame($userView, $item);
     }
 
 
     /**
-     * @return UserView
      * @throws \Exception
+     * @return UserView
      */
     protected function createUserView(): UserView
     {

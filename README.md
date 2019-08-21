@@ -1,15 +1,18 @@
-# sf4-ddd-user-admin
-Proof web with symfony 4 under DDD architecture for users administration.
+# user-admin
+Proof web for DDD, CQRS, Event Sourcing applications using Symfony as framework and running with php7.
 
-# Event Store
-```bash
-$ ./bin/console broadway:event-store:schema:init
-```
+This application is inspired by the fantastic [jorge07/symfony-4-es-cqrs-boilerplate](https://github.com/jorge07/symfony-4-es-cqrs-boilerplate) repository, serving as a reference and learning for this development.
 
-# lexik-jwt-authentication
-```bash
-$ openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
-$ openssl pkey -in config/jwt/private.pem -out config/jwt/public.pem -pubout
-```
+## Documentation
 
-Check permissions for `private.pem`.
+[Install](https://github.com/ginsen/user-admin/tree/master/doc/install.md)
+
+[Buses](https://github.com/ginsen/user-admin/tree/master/doc/buses.md)
+
+[Creating an Application Use Case](https://github.com/ginsen/user-admin/tree/master/doc/useCase.md)
+
+[Adding Projections](https://github.com/ginsen/user-admin/tree/master/doc/projections.md)
+
+## Architecture
+
+![Architecture](https://i.imgur.com/SzHgMft.png)

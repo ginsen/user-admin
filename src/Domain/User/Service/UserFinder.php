@@ -30,7 +30,7 @@ class UserFinder
 
 
     /**
-     * @param  Email $email
+     * @param  Email                  $email
      * @return UserViewInterface|null
      */
     public function findByEmail(Email $email): ?UserViewInterface
@@ -43,7 +43,7 @@ class UserFinder
 
 
     /**
-     * @param  UuidInterface $uuid
+     * @param  UuidInterface     $uuid
      * @throws \Exception
      * @return UserViewInterface
      */

@@ -20,7 +20,7 @@ class UserTest extends TestCase implements UniqueEmailSpecificationInterface
 
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function setUp()
     {
@@ -34,7 +34,7 @@ class UserTest extends TestCase implements UniqueEmailSpecificationInterface
      */
     public function it_should_create_one_user_instance()
     {
-        $uuid = Uuid::uuid4();
+        $uuid        = Uuid::uuid4();
         $credentials = new Credentials(
             Email::fromStr('test@test.net'),
             Password::encode('123456')
@@ -43,9 +43,9 @@ class UserTest extends TestCase implements UniqueEmailSpecificationInterface
         $user = User::create($uuid, $credentials, $this);
 
         self::assertInstanceOf(User::class, $user);
-        self::assertEquals($uuid, $user->getUuid());
-        self::assertEquals($credentials->email, $user->getEmail());
-        self::assertEquals($credentials->password, $user->getPassword());
+        self::assertSame($uuid, $user->getUuid());
+        self::assertSame($credentials->email, $user->getEmail());
+        self::assertSame($credentials->password, $user->getPassword());
         self::assertTrue($user->isActive());
     }
 
@@ -59,7 +59,7 @@ class UserTest extends TestCase implements UniqueEmailSpecificationInterface
         $this->isUnique = false;
         $this->expectException(EmailAlreadyExistException::class);
 
-        $uuid = Uuid::uuid4();
+        $uuid        = Uuid::uuid4();
         $credentials = new Credentials(
             Email::fromStr('test@test.net'),
             Password::encode('123456')
@@ -75,7 +75,7 @@ class UserTest extends TestCase implements UniqueEmailSpecificationInterface
      */
     public function it_should_sign_in_user()
     {
-        $uuid = Uuid::uuid4();
+        $uuid        = Uuid::uuid4();
         $credentials = new Credentials(
             Email::fromStr('sign.in@test.net'),
             Password::encode('123456')
@@ -94,7 +94,7 @@ class UserTest extends TestCase implements UniqueEmailSpecificationInterface
      */
     public function it_should_change_email_user()
     {
-        $uuid = Uuid::uuid4();
+        $uuid        = Uuid::uuid4();
         $credentials = new Credentials(
             Email::fromStr('foo@test.net'),
             Password::encode('123456')
@@ -103,7 +103,7 @@ class UserTest extends TestCase implements UniqueEmailSpecificationInterface
         $user = User::create($uuid, $credentials, $this);
         $user->changeEmail(Email::fromStr('bar@test.net'), $this);
 
-        self::assertEquals('bar@test.net', $user->getEmail()->toStr());
+        self::assertSame('bar@test.net', $user->getEmail()->toStr());
     }
 
 
@@ -113,7 +113,7 @@ class UserTest extends TestCase implements UniqueEmailSpecificationInterface
      */
     public function it_should_change_alive_status_user()
     {
-        $uuid = Uuid::uuid4();
+        $uuid        = Uuid::uuid4();
         $credentials = new Credentials(
             Email::fromStr('active@test.net'),
             Password::encode('123456')
@@ -130,7 +130,7 @@ class UserTest extends TestCase implements UniqueEmailSpecificationInterface
 
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isUnique(Email $email): bool
     {

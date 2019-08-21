@@ -44,7 +44,7 @@ class UserSignedInTest extends TestCase
             'email' => $email->toStr(),
         ];
 
-        self::assertEquals($expected, $data);
+        self::assertSame($expected, $data);
     }
 
 
@@ -64,7 +64,7 @@ class UserSignedInTest extends TestCase
 
         $event = UserSignedIn::deserialize($data);
 
-        self::assertEquals($event->uuid, $uuid);
-        self::assertEquals($event->email, $email);
+        self::assertSame($event->uuid->toString(), $uuid->toString());
+        self::assertSame($event->email->toStr(), $email->toStr());
     }
 }

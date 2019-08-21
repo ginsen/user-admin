@@ -7,7 +7,6 @@ namespace App\UI\Cli\Command;
 use App\Application\Command\User\SignUp\SignUpCommand;
 use App\Application\Query\Item;
 use App\Application\Query\User\FindByEmail\FindByEmailQuery;
-use App\Domain\User\Entity\User;
 use App\Domain\User\ValueObj\Credentials;
 use App\UI\Cli\Command\Base\CustomCommand;
 use League\Tactician\CommandBus;
@@ -76,9 +75,8 @@ class CreateUserCLICommand extends CustomCommand
 
 
     /**
-     * @param string      $phrase
-     * @param string|null $firstPassword
-     *
+     * @param  string      $phrase
+     * @param  string|null $firstPassword
      * @return Question
      */
     private function getQuestionPassword(string $phrase, string $firstPassword = null): Question
@@ -94,7 +92,6 @@ class CreateUserCLICommand extends CustomCommand
 
     /**
      * {@inheritdoc}
-     *
      * @throws \Exception
      */
     public function execute(InputInterface $input, OutputInterface $output)

@@ -21,9 +21,9 @@ class UserWasCreatedTest extends TestCase
      */
     public function event_should_be_serializable_instance()
     {
-        $uuid     = Uuid::uuid4();
-        $dateTime = DateTime::now();
-        $active   = true;
+        $uuid        = Uuid::uuid4();
+        $dateTime    = DateTime::now();
+        $active      = true;
         $credentials = new Credentials(
             Email::fromStr('test@test.net'),
             Password::encode('123456')
@@ -41,9 +41,9 @@ class UserWasCreatedTest extends TestCase
      */
     public function event_should_return_array_when_serialize()
     {
-        $uuid     = Uuid::uuid4();
-        $dateTime = DateTime::now();
-        $active   = true;
+        $uuid        = Uuid::uuid4();
+        $dateTime    = DateTime::now();
+        $active      = true;
         $credentials = new Credentials(
             Email::fromStr('test@test.net'),
             Password::encode('123456')
@@ -60,7 +60,7 @@ class UserWasCreatedTest extends TestCase
             'created_at' => $dateTime->toStr(),
         ];
 
-        self::assertEquals($expected, $data);
+        self::assertSame($expected, $data);
     }
 
 
@@ -70,9 +70,9 @@ class UserWasCreatedTest extends TestCase
      */
     public function event_should_build_instance_when_deserialize()
     {
-        $uuid     = Uuid::uuid4();
-        $dateTime = DateTime::now();
-        $active   = true;
+        $uuid        = Uuid::uuid4();
+        $dateTime    = DateTime::now();
+        $active      = true;
         $credentials = new Credentials(
             Email::fromStr('test@test.net'),
             Password::encode('123456')
@@ -88,10 +88,10 @@ class UserWasCreatedTest extends TestCase
 
         $event = UserWasCreated::deserialize($data);
 
-        self::assertEquals($event->uuid, $uuid);
-        self::assertEquals($event->email, $credentials->email);
-        self::assertEquals($event->password, $credentials->password);
-        self::assertEquals($event->active, $active);
-        self::assertEquals($event->createdAt, $dateTime);
+        self::assertSame($event->uuid->toString(), $uuid->toString());
+        self::assertSame($event->email->toStr(), $credentials->email->toStr());
+        self::assertSame($event->password->toStr(), $credentials->password->toStr());
+        self::assertSame($event->active, $active);
+        self::assertSame($event->createdAt->toStr(), $dateTime->toStr());
     }
 }

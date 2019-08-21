@@ -27,7 +27,7 @@ class UserInMemoryReadModelTest extends TestCase
 
         $specFactory   = new CollectionUserSpecificationFactory();
         $specification = $specFactory->createForFindOneWithUuid($userView->getUuid());
-        $item = $readModel->getOneOrNull($specification);
+        $item          = $readModel->getOneOrNull($specification);
 
         self::assertInstanceOf(UserView::class, $item);
     }
@@ -45,7 +45,7 @@ class UserInMemoryReadModelTest extends TestCase
 
         $specFactory   = new CollectionUserSpecificationFactory();
         $specification = $specFactory->createForFindOneWithUuid(Uuid::uuid4());
-        $item = $readModel->getOneOrNull($specification);
+        $item          = $readModel->getOneOrNull($specification);
 
         self::assertNull($item);
     }
@@ -63,9 +63,9 @@ class UserInMemoryReadModelTest extends TestCase
 
         $specFactory   = new CollectionUserSpecificationFactory();
         $specification = $specFactory->createForFindOneWithEmail($userView->getEmail());
-        $item = $readModel->getOneOrNull($specification);
+        $item          = $readModel->getOneOrNull($specification);
 
-        self::assertEquals($userView, $item);
+        self::assertSame($userView, $item);
     }
 
 
@@ -81,15 +81,15 @@ class UserInMemoryReadModelTest extends TestCase
 
         $specFactory   = new CollectionUserSpecificationFactory();
         $specification = $specFactory->createForFindOneWithEmail(Email::fromStr('notexist@test.com'));
-        $item = $readModel->getOneOrNull($specification);
+        $item          = $readModel->getOneOrNull($specification);
 
         self::assertNull($item);
     }
 
 
     /**
-     * @return UserView
      * @throws \Exception
+     * @return UserView
      */
     protected function createUserView(): UserView
     {
