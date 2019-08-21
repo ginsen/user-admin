@@ -26,12 +26,12 @@ $ ./bin/console doctrine:database:create
 $ ./bin/console doctrine:schema:create
 ```
 
-# Generate Event Store
+## Generate Event Store
 ```bash
 $ ./bin/console broadway:event-store:schema:init
 ```
 
-# Configure lexik-jwt-authentication
+## Configure lexik-jwt-authentication
 
 ```bash
 $ openssl genpkey -out config/jwt/private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
