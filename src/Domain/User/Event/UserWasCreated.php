@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\User\Event;
 
+use App\Domain\User\ValueObj\BoolObj;
 use App\Domain\User\ValueObj\Credentials;
 use App\Domain\User\ValueObj\DateTime;
 use App\Domain\User\ValueObj\Email;
@@ -24,7 +25,7 @@ class UserWasCreated implements Serializable
     /** @var Password */
     public $password;
 
-    /** @var bool */
+    /** @var BoolObj */
     public $active;
 
     /** @var DateTime */
@@ -35,10 +36,10 @@ class UserWasCreated implements Serializable
      * UserWasCreated constructor.
      * @param UuidInterface $uuid
      * @param Credentials   $credentials
-     * @param bool          $active
+     * @param BoolObj       $active
      * @param DateTime      $createdAt
      */
-    public function __construct(UuidInterface $uuid, Credentials $credentials, bool $active, DateTime $createdAt)
+    public function __construct(UuidInterface $uuid, Credentials $credentials, BoolObj $active, DateTime $createdAt)
     {
         $this->uuid        = $uuid;
         $this->email       = $credentials->email;
@@ -57,7 +58,7 @@ class UserWasCreated implements Serializable
             'uuid'       => $this->uuid->toString(),
             'email'      => $this->email->toStr(),
             'password'   => $this->password->toStr(),
-            'active'     => $this->active,
+            'active'     => $this->active->toStr(),
             'created_at' => $this->createdAt->toStr(),
         ];
     }
@@ -81,7 +82,7 @@ class UserWasCreated implements Serializable
                 Email::fromStr($data['email']),
                 Password::fromHash($data['password'])
             ),
-            $data['active'],
+            BoolObj::fromStr($data['active']),
             DateTime::fromStr($data['created_at'])
         );
     }

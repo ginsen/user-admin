@@ -20,10 +20,12 @@ doctrine:
             email: App\Infrastructure\Doctrine\Type\EmailType
             password: App\Infrastructure\Doctrine\Type\PasswordType
             dateTime: App\Infrastructure\Doctrine\Type\DateTimeType
+            boolObj: App\Infrastructure\Doctrine\Type\BoolObjType
         mapping_types:
             email: string
             password: string
             dateTime: datetime
+            boolObj: boolean
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore

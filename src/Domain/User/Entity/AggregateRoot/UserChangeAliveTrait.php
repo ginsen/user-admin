@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace App\Domain\User\Entity\AggregateRoot;
 
 use App\Domain\User\Event\UserAliveChanged;
+use App\Domain\User\ValueObj\BoolObj;
 use App\Domain\User\ValueObj\DateTime;
 use Assert\Assertion;
 
 trait UserChangeAliveTrait
 {
     /**
-     * @param bool $active
+     * @param BoolObj $active
      */
-    public function changeActive(bool $active): void
+    public function changeActive(BoolObj $active): void
     {
         $this->apply(new UserAliveChanged($this->uuid, $active, DateTime::now()));
     }

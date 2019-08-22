@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Tests\Unit\User\Event;
 
 use App\Domain\User\Event\UserAliveChanged;
+use App\Domain\User\ValueObj\BoolObj;
 use App\Domain\User\ValueObj\DateTime;
 use Broadway\Serializer\Serializable;
 use PHPUnit\Framework\TestCase;
@@ -20,8 +21,9 @@ class UserAliveChangedTest extends TestCase
     {
         $uuid     = Uuid::uuid4();
         $dateTime = DateTime::now();
+        $active   = BoolObj::fromBool(true);
 
-        $event = new UserAliveChanged($uuid, true, $dateTime);
+        $event = new UserAliveChanged($uuid, $active, $dateTime);
 
         self::assertInstanceOf(Serializable::class, $event);
     }
@@ -35,14 +37,14 @@ class UserAliveChangedTest extends TestCase
     {
         $uuid     = Uuid::uuid4();
         $dateTime = DateTime::now();
-        $active   = true;
+        $active   = BoolObj::fromBool(true);
 
         $event = new UserAliveChanged($uuid, $active, $dateTime);
         $data  = $event->serialize();
 
         $expected = [
             'uuid'       => $uuid->toString(),
-            'active'     => $active,
+            'active'     => $active->toStr(),
             'updated_at' => $dateTime->toStr(),
         ];
 
@@ -58,18 +60,18 @@ class UserAliveChangedTest extends TestCase
     {
         $uuid     = Uuid::uuid4();
         $dateTime = DateTime::now();
-        $active   = true;
+        $active   = BoolObj::fromBool(true);
 
         $data = [
             'uuid'       => $uuid->toString(),
-            'active'     => $active,
+            'active'     => $active->toStr(),
             'updated_at' => $dateTime->toStr(),
         ];
 
         $event = UserAliveChanged::deserialize($data);
 
         self::assertSame($event->uuid->toString(), $uuid->toString());
-        self::assertSame($event->active, $active);
+        self::assertSame($event->active->toStr(), $active->toStr());
         self::assertSame($event->updatedAt->toStr(), $dateTime->toStr());
     }
 }

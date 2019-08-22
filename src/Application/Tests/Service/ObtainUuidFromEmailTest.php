@@ -6,6 +6,7 @@ namespace App\Application\Tests\Service;
 
 use App\Application\Service\ObtainUuidFromEmail;
 use App\Domain\User\Service\UserFinder;
+use App\Domain\User\ValueObj\BoolObj;
 use App\Domain\User\ValueObj\DateTime;
 use App\Domain\User\ValueObj\Email;
 use App\Domain\User\ValueObj\Password;
@@ -59,12 +60,13 @@ class ObtainUuidFromEmailTest extends TestCase
         $uuid      = Uuid::uuid4();
         $password  = Password::encode('123456');
         $createdAt = DateTime::now();
+        $active    = BoolObj::fromBool(true);
 
         $userView = UserView::deserialize([
             'uuid'       => $uuid->toString(),
             'email'      => $email->toStr(),
             'password'   => $password->toStr(),
-            'active'     => true,
+            'active'     => $active->toStr(),
             'created_at' => $createdAt->toStr(),
         ]);
 

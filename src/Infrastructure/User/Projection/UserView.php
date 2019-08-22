@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\User\Projection;
 
 use App\Domain\User\Entity\UserViewInterface;
+use App\Domain\User\ValueObj\BoolObj;
 use App\Domain\User\ValueObj\Credentials;
 use App\Domain\User\ValueObj\DateTime;
 use App\Domain\User\ValueObj\Email;
@@ -21,7 +22,7 @@ class UserView implements UserViewInterface
     /** @var Credentials */
     protected $credentials;
 
-    /** @var bool */
+    /** @var BoolObj */
     protected $active;
 
     /** @var DateTime */
@@ -108,14 +109,14 @@ class UserView implements UserViewInterface
      */
     public function isActive(): bool
     {
-        return $this->active;
+        return $this->active->toBool();
     }
 
 
     /**
-     * @param bool $active
+     * @param BoolObj $active
      */
-    public function setActive(bool $active): void
+    public function setActive(BoolObj $active): void
     {
         $this->active = $active;
     }
@@ -183,7 +184,7 @@ class UserView implements UserViewInterface
             Password::fromHash($data['password'] ?? '')
         );
 
-        $instance->active    = $data['active'];
+        $instance->active    = BoolObj::fromStr($data['active']);
         $instance->createdAt = DateTime::fromStr($data['created_at']);
         $instance->updatedAt = isset($data['updated_at']) ? DateTime::fromStr($data['updated_at']) : null;
 
@@ -201,7 +202,7 @@ class UserView implements UserViewInterface
             'credentials' => [
                 'email' => (string) $this->credentials->email,
             ],
-            'active' => $this->active,
+            'active' => $this->active->toStr(),
         ];
     }
 }

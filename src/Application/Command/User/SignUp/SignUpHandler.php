@@ -40,6 +40,7 @@ class SignUpHandler implements CommandHandlerInterface
         $user = User::create(
             $command->uuid,
             $command->credentials,
+            $command->active,
             $this->uniqueEmailSpecification
         );
 

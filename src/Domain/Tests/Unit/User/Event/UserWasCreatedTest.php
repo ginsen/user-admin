@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Tests\Unit\User\Event;
 
 use App\Domain\User\Event\UserWasCreated;
+use App\Domain\User\ValueObj\BoolObj;
 use App\Domain\User\ValueObj\Credentials;
 use App\Domain\User\ValueObj\DateTime;
 use App\Domain\User\ValueObj\Email;
@@ -23,7 +24,7 @@ class UserWasCreatedTest extends TestCase
     {
         $uuid        = Uuid::uuid4();
         $dateTime    = DateTime::now();
-        $active      = true;
+        $active      = BoolObj::fromBool(true);
         $credentials = new Credentials(
             Email::fromStr('test@test.net'),
             Password::encode('123456')
@@ -43,7 +44,7 @@ class UserWasCreatedTest extends TestCase
     {
         $uuid        = Uuid::uuid4();
         $dateTime    = DateTime::now();
-        $active      = true;
+        $active      = BoolObj::fromBool(true);
         $credentials = new Credentials(
             Email::fromStr('test@test.net'),
             Password::encode('123456')
@@ -56,7 +57,7 @@ class UserWasCreatedTest extends TestCase
             'uuid'       => $uuid->toString(),
             'email'      => $credentials->email->toStr(),
             'password'   => $credentials->password->toStr(),
-            'active'     => $active,
+            'active'     => $active->toStr(),
             'created_at' => $dateTime->toStr(),
         ];
 
@@ -72,7 +73,7 @@ class UserWasCreatedTest extends TestCase
     {
         $uuid        = Uuid::uuid4();
         $dateTime    = DateTime::now();
-        $active      = true;
+        $active      = BoolObj::fromBool(true);
         $credentials = new Credentials(
             Email::fromStr('test@test.net'),
             Password::encode('123456')
@@ -82,7 +83,7 @@ class UserWasCreatedTest extends TestCase
             'uuid'       => $uuid->toString(),
             'email'      => $credentials->email->toStr(),
             'password'   => $credentials->password->toStr(),
-            'active'     => $active,
+            'active'     => $active->toStr(),
             'created_at' => $dateTime->toStr(),
         ];
 
@@ -91,7 +92,7 @@ class UserWasCreatedTest extends TestCase
         self::assertSame($event->uuid->toString(), $uuid->toString());
         self::assertSame($event->email->toStr(), $credentials->email->toStr());
         self::assertSame($event->password->toStr(), $credentials->password->toStr());
-        self::assertSame($event->active, $active);
+        self::assertSame($event->active->toStr(), $active->toStr());
         self::assertSame($event->createdAt->toStr(), $dateTime->toStr());
     }
 }

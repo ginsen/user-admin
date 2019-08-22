@@ -7,6 +7,7 @@ namespace App\Domain\Tests\Unit\User\Entity;
 use App\Domain\User\Entity\User;
 use App\Domain\User\Exception\Email\EmailAlreadyExistException;
 use App\Domain\User\Specification\UniqueEmailSpecificationInterface;
+use App\Domain\User\ValueObj\BoolObj;
 use App\Domain\User\ValueObj\Credentials;
 use App\Domain\User\ValueObj\Email;
 use App\Domain\User\ValueObj\Password;
@@ -35,12 +36,13 @@ class UserTest extends TestCase implements UniqueEmailSpecificationInterface
     public function it_should_create_one_user_instance()
     {
         $uuid        = Uuid::uuid4();
+        $active      = BoolObj::fromBool(true);
         $credentials = new Credentials(
             Email::fromStr('test@test.net'),
             Password::encode('123456')
         );
 
-        $user = User::create($uuid, $credentials, $this);
+        $user = User::create($uuid, $credentials, $active, $this);
 
         self::assertInstanceOf(User::class, $user);
         self::assertSame($uuid, $user->getUuid());
@@ -60,12 +62,13 @@ class UserTest extends TestCase implements UniqueEmailSpecificationInterface
         $this->expectException(EmailAlreadyExistException::class);
 
         $uuid        = Uuid::uuid4();
+        $active      = BoolObj::fromBool(true);
         $credentials = new Credentials(
             Email::fromStr('test@test.net'),
             Password::encode('123456')
         );
 
-        User::create($uuid, $credentials, $this);
+        User::create($uuid, $credentials, $active, $this);
     }
 
 
@@ -76,12 +79,13 @@ class UserTest extends TestCase implements UniqueEmailSpecificationInterface
     public function it_should_sign_in_user()
     {
         $uuid        = Uuid::uuid4();
+        $active      = BoolObj::fromBool(true);
         $credentials = new Credentials(
             Email::fromStr('sign.in@test.net'),
             Password::encode('123456')
         );
 
-        $user = User::create($uuid, $credentials, $this);
+        $user = User::create($uuid, $credentials, $active, $this);
         $user->signIn('123456');
 
         self::assertInstanceOf(User::class, $user);
@@ -95,12 +99,13 @@ class UserTest extends TestCase implements UniqueEmailSpecificationInterface
     public function it_should_change_email_user()
     {
         $uuid        = Uuid::uuid4();
+        $active      = BoolObj::fromBool(true);
         $credentials = new Credentials(
             Email::fromStr('foo@test.net'),
             Password::encode('123456')
         );
 
-        $user = User::create($uuid, $credentials, $this);
+        $user = User::create($uuid, $credentials, $active, $this);
         $user->changeEmail(Email::fromStr('bar@test.net'), $this);
 
         self::assertSame('bar@test.net', $user->getEmail()->toStr());
@@ -114,17 +119,18 @@ class UserTest extends TestCase implements UniqueEmailSpecificationInterface
     public function it_should_change_alive_status_user()
     {
         $uuid        = Uuid::uuid4();
+        $active      = BoolObj::fromBool(true);
         $credentials = new Credentials(
             Email::fromStr('active@test.net'),
             Password::encode('123456')
         );
 
-        $user = User::create($uuid, $credentials, $this);
+        $user = User::create($uuid, $credentials, $active, $this);
 
-        $user->changeActive(false);
+        $user->changeActive(BoolObj::fromBool(false));
         self::assertFalse($user->isActive());
 
-        $user->changeActive(true);
+        $user->changeActive(BoolObj::fromBool(true));
         self::assertTrue($user->isActive());
     }
 

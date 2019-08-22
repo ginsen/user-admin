@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\User\Entity;
 
+use App\Domain\User\ValueObj\BoolObj;
 use App\Domain\User\ValueObj\Credentials;
 use App\Domain\User\ValueObj\DateTime;
 use App\Domain\User\ValueObj\Email;
@@ -29,7 +30,7 @@ interface UserViewInterface extends SerializableReadModel
 
     public function isActive(): bool;
 
-    public function setActive(bool $active): void;
+    public function setActive(BoolObj $active): void;
 
     public function getCreatedAt(): DateTime;
 

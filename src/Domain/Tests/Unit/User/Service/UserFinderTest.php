@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Tests\Unit\User\Service;
 
 use App\Domain\User\Service\UserFinder;
+use App\Domain\User\ValueObj\BoolObj;
 use App\Domain\User\ValueObj\DateTime;
 use App\Domain\User\ValueObj\Email;
 use App\Domain\User\ValueObj\Password;
@@ -27,10 +28,9 @@ class UserFinderTest extends TestCase
         $readModel->save($userView);
 
         $specFactory = new CollectionUserSpecificationFactory();
+        $userFinder  = new UserFinder($readModel, $specFactory);
 
-        $finder = new UserFinder($readModel, $specFactory);
-
-        $item = $finder->findByUuid($userView->getUuid());
+        $item = $userFinder->findByUuid($userView->getUuid());
         self::assertSame($userView, $item);
     }
 
@@ -64,12 +64,13 @@ class UserFinderTest extends TestCase
         $email     = Email::fromStr('test@test.com');
         $password  = Password::encode('123456');
         $createdAt = DateTime::now();
+        $active    = BoolObj::fromBool(true);
 
         $userView = UserView::deserialize([
             'uuid'       => $uuid->toString(),
             'email'      => $email->toStr(),
             'password'   => $password->toStr(),
-            'active'     => true,
+            'active'     => $active->toStr(),
             'created_at' => $createdAt->toStr(),
         ]);
 

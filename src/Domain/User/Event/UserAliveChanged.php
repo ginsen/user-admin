@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\User\Event;
 
+use App\Domain\User\ValueObj\BoolObj;
 use App\Domain\User\ValueObj\DateTime;
 use Assert\Assertion;
 use Broadway\Serializer\Serializable;
@@ -15,14 +16,14 @@ class UserAliveChanged implements Serializable
     /** @var UuidInterface */
     public $uuid;
 
-    /** @var bool */
+    /** @var BoolObj */
     public $active;
 
     /** @var DateTime */
     public $updatedAt;
 
 
-    public function __construct(UuidInterface $uuid, bool $active, DateTime $updatedAt)
+    public function __construct(UuidInterface $uuid, BoolObj $active, DateTime $updatedAt)
     {
         $this->uuid      = $uuid;
         $this->active    = $active;
@@ -37,7 +38,7 @@ class UserAliveChanged implements Serializable
     {
         return [
             'uuid'       => $this->uuid->toString(),
-            'active'     => $this->active,
+            'active'     => $this->active->toStr(),
             'updated_at' => $this->updatedAt->toStr(),
         ];
     }
@@ -55,7 +56,7 @@ class UserAliveChanged implements Serializable
 
         return new self(
             Uuid::fromString($data['uuid']),
-            $data['active'],
+            BoolObj::fromStr($data['active']),
             DateTime::fromStr($data['updated_at'])
         );
     }

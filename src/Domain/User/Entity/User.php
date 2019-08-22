@@ -8,6 +8,7 @@ use App\Domain\User\Entity\AggregateRoot\UserChangeAliveTrait;
 use App\Domain\User\Entity\AggregateRoot\UserChangeEmailTrait;
 use App\Domain\User\Entity\AggregateRoot\UserCreateTrait;
 use App\Domain\User\Entity\AggregateRoot\UserSignInTrait;
+use App\Domain\User\ValueObj\BoolObj;
 use App\Domain\User\ValueObj\DateTime;
 use App\Domain\User\ValueObj\Email;
 use App\Domain\User\ValueObj\Password;
@@ -32,7 +33,7 @@ class User extends EventSourcedAggregateRoot
     /** @var Password */
     private $password;
 
-    /** @var bool */
+    /** @var BoolObj */
     protected $active;
 
     /** @var DateTime */
@@ -101,14 +102,14 @@ class User extends EventSourcedAggregateRoot
      */
     public function isActive(): bool
     {
-        return $this->active;
+        return $this->active->toBool();
     }
 
 
     /**
-     * @param bool $active
+     * @param BoolObj $active
      */
-    public function setActive(bool $active): void
+    public function setActive(BoolObj $active): void
     {
         $this->active = $active;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Tests\Unit\User\Repository;
 
+use App\Domain\User\ValueObj\BoolObj;
 use App\Domain\User\ValueObj\DateTime;
 use App\Domain\User\ValueObj\Email;
 use App\Domain\User\ValueObj\Password;
@@ -96,13 +97,14 @@ class UserInMemoryReadModelTest extends TestCase
         $uuid      = Uuid::uuid4();
         $email     = Email::fromStr('test@test.com');
         $password  = Password::encode('123456');
+        $active    = BoolObj::fromBool(true);
         $createdAt = DateTime::now();
 
         $userView = UserView::deserialize([
             'uuid'       => $uuid->toString(),
             'email'      => $email->toStr(),
             'password'   => $password->toStr(),
-            'active'     => true,
+            'active'     => $active->toStr(),
             'created_at' => $createdAt->toStr(),
         ]);
 

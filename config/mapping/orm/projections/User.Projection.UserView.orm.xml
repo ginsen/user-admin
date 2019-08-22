@@ -8,7 +8,7 @@
 
         <embedded name="credentials" class="App\Domain\User\ValueObj\Credentials"/>
 
-        <field name="active" type="boolean" column="active" nullable="false">
+        <field name="active" type="boolObj" column="active" nullable="false">
             <options>
                 <option name="default">1</option>
             </options>

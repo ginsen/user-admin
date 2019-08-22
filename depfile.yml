@@ -12,7 +12,7 @@ layers:
   - name: Application
     collectors:
       - type: className
-        regex: App\\Application\\.*
+        regex: App\\Application\\[^Tests\\].*
 
   - name: Infrastructure
     collectors:

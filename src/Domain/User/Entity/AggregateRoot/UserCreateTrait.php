@@ -6,6 +6,7 @@ namespace App\Domain\User\Entity\AggregateRoot;
 
 use App\Domain\User\Event\UserWasCreated;
 use App\Domain\User\Specification\UniqueEmailSpecificationInterface;
+use App\Domain\User\ValueObj\BoolObj;
 use App\Domain\User\ValueObj\Credentials;
 use App\Domain\User\ValueObj\DateTime;
 use Ramsey\Uuid\UuidInterface;
@@ -15,13 +16,14 @@ trait UserCreateTrait
     public static function create(
         UuidInterface $uuid,
         Credentials $credentials,
+        BoolObj $active,
         UniqueEmailSpecificationInterface $uniqueEmailSpecification
     ): self {
         $uniqueEmailSpecification->isUnique($credentials->email);
 
         $user = new self();
 
-        $user->apply(new UserWasCreated($uuid, $credentials, true, DateTime::now()));
+        $user->apply(new UserWasCreated($uuid, $credentials, $active, DateTime::now()));
 
         return $user;
     }

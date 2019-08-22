@@ -54,6 +54,15 @@ class DateTime
     /**
      * @return string
      */
+    public function __toString(): string
+    {
+        return $this->toStr();
+    }
+
+
+    /**
+     * @return string
+     */
     public function toStr(): string
     {
         return $this->dateTime->format(self::FORMAT);
