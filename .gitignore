@@ -16,12 +16,15 @@ sonar-project.properties
 ###< Sonar Scanner ###
 
 ###> symfony/framework-bundle ###
+/public/bundles/
+/vendor/
+/var/
+/bin/
+!/bin/console
+!/bin/phpunit
 /.env.local
 /.env.local.php
 /.env.*.local
-/public/bundles/
-/var/
-/vendor/
 ###< symfony/framework-bundle ###
 
 ###> friendsofphp/php-cs-fixer ###
